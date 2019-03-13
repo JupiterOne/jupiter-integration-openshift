@@ -5,38 +5,38 @@ import {
   IntegrationInvocationEvent,
   PersisterClient,
 } from "@jupiterone/jupiter-managed-integration-sdk";
-import ProviderClient from "./ProviderClient";
+import OpenShiftClient from "./OpenShiftClient";
 
-export const ACCOUNT_ENTITY_TYPE = "provider_account";
+export const ACCOUNT_ENTITY_TYPE = "openshift_account";
 export const ACCOUNT_ENTITY_CLASS = "Account";
 
-export const USER_ENTITY_TYPE = "provider_user";
-export const USER_ENTITY_CLASS = "User";
-export const ACCOUNT_USER_RELATIONSHIP_TYPE = "provider_account_user";
+export const PROJECT_ENTITY_TYPE = "openshift_user";
+export const PROJECT_ENTITY_CLASS = "User";
+export const ACCOUNT_PROJECT_RELATIONSHIP_TYPE = "openshift_account_user";
 
-export const DEVICE_ENTITY_TYPE = "provider_device";
-export const DEVICE_ENTITY_CLASS = "Device";
-export const ACCOUNT_DEVICE_RELATIONSHIP_TYPE = "provider_account_device";
-
-export const USER_DEVICE_RELATIONSHIP_TYPE = "provider_user_device";
-export const USER_DEVICE_RELATIONSHIP_CLASS = "HAS";
+export const GROUP_ENTITY_TYPE = "openshift_user_group";
+export const GROUP_ENTITY_CLASS = "UserGroup";
+export const ACCOUNT_GROUP_RELATIONSHIP_TYPE = "openshift_account_user_group";
 
 export interface AccountEntity extends EntityFromIntegration {
-  accountId: string;
+  cluster: string;
 }
 
-export interface UserEntity extends EntityFromIntegration {
-  userId: string;
+export interface ProjectEntity extends EntityFromIntegration {
+  uid: string;
+  groups: string[];
 }
 
-export interface DeviceEntity extends EntityFromIntegration {
-  deviceId: string;
-  ownerId: string;
+export interface GroupEntity extends EntityFromIntegration {
+  uid: string;
+  namespace: string;
+  resourceVersion: string;
+  generation: number;
 }
 
-export interface ExampleExecutionContext
+export interface OpenShiftExecutionContext
   extends IntegrationExecutionContext<IntegrationInvocationEvent> {
   graph: GraphClient;
   persister: PersisterClient;
-  provider: ProviderClient;
+  openshift: OpenShiftClient;
 }

@@ -10,12 +10,13 @@ async function run(): Promise<void> {
   const logger = createLogger({ name: "local", level: TRACE });
 
   const integrationConfig = {
-    // providerApiToken: process.env.PROVIDER_LOCAL_EXECUTION_API_TOKEN
+    cluster: process.env.OPENSHIFT_LOCAL_EXECUTION_CLUSTER,
+    namespace: process.env.OPENSHIFT_LOCAL_EXECUTION_NAMESPACE,
+    user: process.env.OPENSHIFT_LOCAL_EXECUTION_USER,
+    apiToken: process.env.OPENSHIFT_LOCAL_EXECUTION_API_TOKEN,
   };
 
-  const invocationArgs = {
-    // providerPrivateKey: process.env.PROVIDER_LOCAL_EXECUTION_PRIVATE_KEY
-  };
+  const invocationArgs = {};
 
   logger.info(
     await executeSingleHandlerLocal(

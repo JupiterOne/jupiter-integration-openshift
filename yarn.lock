@@ -812,6 +812,9 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.21.tgz#7e8a0c34cf29f4e17a36e9bd0ea72d45ba03908e"
   integrity sha512-CBgLNk4o3XMnqMc0rhb6lc77IwShMEglz05deDcn2lQxyXEZivfwgYJu7SMha9V5XcrP6qZuevTHV/QrN2vjKQ==
 
+"@types/openshift-rest-client@file:./openshift-rest-client":
+  version "1.6.4"
+
 "@types/unist@*", "@types/unist@^2.0.0":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
@@ -1706,6 +1709,11 @@ domexception@^1.0.1:
   integrity sha512-raigMkn7CJNNo6Ihro1fzG7wr3fHuYVytzquZKX5n0yizGsTcYgzdIUwj1X9pK0VvjeihV+XiclP+DjwbsSKug==
   dependencies:
     webidl-conversions "^4.0.2"
+
+dotenv@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
+  integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
 
 dtrace-provider@~0.8:
   version "0.8.7"
@@ -3087,7 +3095,7 @@ js-yaml@^3.12.0, js-yaml@^3.7.0, js-yaml@^3.9.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-js-yaml@^3.6.1:
+js-yaml@^3.6.1, js-yaml@^3.8.4:
   version "3.12.2"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.2.tgz#ef1d067c5a9d9cb65bd72f285b5d8105c77f14fc"
   integrity sha512-QHn/Lh/7HhZ/Twc7vJYQTkjuCa0kaCcDcjK5Zlk2rvnUpy7DxMJ23+Jc2dcyvltwQVg1nygAVlB2oRDFHoRS5Q==
@@ -3845,6 +3853,21 @@ onetime@^2.0.0:
   integrity sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
   dependencies:
     mimic-fn "^1.0.0"
+
+openshift-config-loader@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/openshift-config-loader/-/openshift-config-loader-0.4.0.tgz#ed0f4ec62df44740802bbd5bbc40003b5746383b"
+  integrity sha512-/FMAxwvHTdXurj7OcsZ3uhMd8a6l2wvMhp8lyoh7L3JjByEFjmebezVVMl73VE11HW+i+k4K+svGFgSh192ZXQ==
+  dependencies:
+    js-yaml "^3.8.4"
+
+openshift-rest-client@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/openshift-rest-client/-/openshift-rest-client-1.6.4.tgz#7598b4ae0933a04d70f582f5b7da72d51bed214f"
+  integrity sha512-0Pc3Ql4mM5OFZU6LgYSugBCNBb/NBkqxdoY75y+nx6s3n6VMVZ9Elnl31xIL6BO6SZ3t7N1IBURlFh3Ou9vyhQ==
+  dependencies:
+    openshift-config-loader "^0.4.0"
+    request "~2.88.0"
 
 optimist@^0.6.1:
   version "0.6.1"
@@ -4991,7 +5014,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@^2.87.0:
+request@^2.87.0, request@~2.88.0:
   version "2.88.0"
   resolved "https://registry.npmjs.org/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==

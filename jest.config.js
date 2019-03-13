@@ -3,10 +3,14 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest",
   },
   testMatch: ["<rootDir>/src/**/*.test.{js,ts}"],
-  collectCoverageFrom: ["src/**/*.ts"],
-  coveragePathIgnorePatterns: [
-    "<rootDir>/src/index.ts",
-    "<rootDir>/src/ProviderClient.ts",
+  collectCoverageFrom: [
+    "src/**/*.ts",
+    "!src/index.ts",
+    "!src/OpenShiftClient.ts",
+    "!src/converters.ts",
+    "!src/executionHandler.ts",
+    "!src/initializeContext.ts",
+    "!src/types.ts",
   ],
   moduleFileExtensions: ["ts", "js"],
   testEnvironment: "node",

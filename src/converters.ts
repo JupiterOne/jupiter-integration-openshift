@@ -1,50 +1,55 @@
 import {
   EntityFromIntegration,
+  IntegrationInstance,
   RelationshipFromIntegration,
 } from "@jupiterone/jupiter-managed-integration-sdk";
-import { Account, Device, User } from "./ProviderClient";
 import {
   ACCOUNT_ENTITY_CLASS,
   ACCOUNT_ENTITY_TYPE,
   AccountEntity,
-  DEVICE_ENTITY_CLASS,
-  DEVICE_ENTITY_TYPE,
-  DeviceEntity,
-  USER_DEVICE_RELATIONSHIP_CLASS,
-  USER_DEVICE_RELATIONSHIP_TYPE,
-  USER_ENTITY_CLASS,
-  USER_ENTITY_TYPE,
-  UserEntity,
+  GROUP_ENTITY_CLASS,
+  GROUP_ENTITY_TYPE,
+  GroupEntity,
+  PROJECT_ENTITY_CLASS,
+  PROJECT_ENTITY_TYPE,
+  ProjectEntity,
 } from "./types";
 
-export function createAccountEntity(data: Account): AccountEntity {
+export function createAccountEntity(
+  instance: IntegrationInstance,
+  cluster: string,
+): AccountEntity {
   return {
     _class: ACCOUNT_ENTITY_CLASS,
-    _key: `provider-account-${data.id}`,
+    _key: instance.id,
     _type: ACCOUNT_ENTITY_TYPE,
-    accountId: data.id,
-    displayName: data.name,
+    displayName: instance.name,
+    cluster,
   };
 }
 
-export function createUserEntities(data: User[]): UserEntity[] {
+export function createProjectEntities(data: any[]): ProjectEntity[] {
   return data.map(d => ({
-    _class: USER_ENTITY_CLASS,
+    _class: PROJECT_ENTITY_CLASS,
     _key: `provider-user-${d.id}`,
-    _type: USER_ENTITY_TYPE,
+    _type: PROJECT_ENTITY_TYPE,
     displayName: `${d.firstName} ${d.lastName}`,
-    userId: d.id,
+    uid: d.uid,
+    groups: d.groups,
   }));
 }
 
-export function createDeviceEntities(data: Device[]): DeviceEntity[] {
+export function createGroupEntities(data: any[]): GroupEntity[] {
   return data.map(d => ({
-    _class: DEVICE_ENTITY_CLASS,
+    _class: GROUP_ENTITY_CLASS,
     _key: `provider-device-id-${d.id}`,
-    _type: DEVICE_ENTITY_TYPE,
+    _type: GROUP_ENTITY_TYPE,
     deviceId: d.id,
     displayName: d.manufacturer,
-    ownerId: d.ownerId,
+    uid: d.uid,
+    namespace: d.namespace,
+    generation: d.generation,
+    resourceVersion: d.resourceVersion,
   }));
 }
 
@@ -72,36 +77,5 @@ export function createAccountRelationship(
     _key: `${account._key}_has_${entity._key}`,
     _toEntityKey: entity._key,
     _type: type,
-  };
-}
-
-export function createUserDeviceRelationships(
-  users: UserEntity[],
-  devices: DeviceEntity[],
-) {
-  const usersById: { [id: string]: UserEntity } = {};
-  for (const user of users) {
-    usersById[user.userId] = user;
-  }
-
-  const relationships = [];
-  for (const device of devices) {
-    const user = usersById[device.ownerId];
-    relationships.push(createUserDeviceRelationship(user, device));
-  }
-
-  return relationships;
-}
-
-function createUserDeviceRelationship(
-  user: UserEntity,
-  device: DeviceEntity,
-): RelationshipFromIntegration {
-  return {
-    _class: USER_DEVICE_RELATIONSHIP_CLASS,
-    _fromEntityKey: user._key,
-    _key: `${user._key}_has_${device._key}`,
-    _toEntityKey: device._key,
-    _type: USER_DEVICE_RELATIONSHIP_TYPE,
   };
 }

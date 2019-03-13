@@ -2,15 +2,33 @@ import {
   IntegrationExecutionContext,
   IntegrationInvocationEvent,
 } from "@jupiterone/jupiter-managed-integration-sdk";
-import ProviderClient from "./ProviderClient";
-import { ExampleExecutionContext } from "./types";
+import openshiftRestClient from "openshift-rest-client";
+import OpenShiftClient from "./OpenShiftClient";
+import { OpenShiftExecutionContext } from "./types";
 
-export default function initializeContext(
+export default async function initializeContext(
   context: IntegrationExecutionContext<IntegrationInvocationEvent>,
-): ExampleExecutionContext {
+): Promise<OpenShiftExecutionContext> {
+  const {
+    instance: { config },
+  } = context;
+
+  const openshiftClient = await openshiftRestClient({
+    config: {
+      apiVersion: "v1",
+      context: {
+        cluster: config.cluster,
+        namespace: config.namespace,
+        user: config.user,
+      },
+      user: { token: config.apiToken },
+      cluster: `https://${config.cluster}`,
+    },
+  });
+
   return {
     ...context,
     ...context.clients.getClients(),
-    provider: new ProviderClient(),
+    openshift: new OpenShiftClient(openshiftClient),
   };
 }

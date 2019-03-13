@@ -26,7 +26,7 @@ export default async function invocationValidator(
   //   throw new IntegrationInstanceConfigError('providerAPIKey missing in config');
   // }
   // try {
-  //   new ProviderClient(config.providerAPIKey).someEndpoint();
+  //   new OpenShiftClient(config.providerAPIKey).someEndpoint();
   // } catch (err) {
   //   throw new IntegrationInstanceAuthenticationError(err);
   // }
