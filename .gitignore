@@ -1,0 +1,8 @@
+node_modules/
+build/
+coverage/
+dist/
+jupiterone-jupiter-managed-integration-sdk-*
+openshift.local.clusterup
+yarn-error.log
+.env
