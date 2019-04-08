@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  integration:
+    build: .
+    volumes:
+      - .:/app:cached
+      - ~/.ssh:/root/.ssh
+      - ~/.bash_history:/root/.bash_history
+    environment:
+      NODE_ENV: development
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+      GRAPH_DB_ENDPOINT: graph
+      OPENSHIFT_LOCAL_EXECUTION_CLUSTER: '192.168.64.2:8443'
+      OPENSHIFT_LOCAL_EXECUTION_NAMESPACE: 'openshift-infra'
+      OPENSHIFT_LOCAL_EXECUTION_USER: 'jupiterone/192-168-64-2:8443'
+      OPENSHIFT_LOCAL_EXECUTION_API_TOKEN: 'eyJhbGciOiJ....'
+    depends_on:
+      - graph
+  graph:
+    image: tinkerpop/gremlin-server:3.3
+    ports:
+      - "8182:8182"

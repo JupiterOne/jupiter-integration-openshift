@@ -3,7 +3,7 @@ import {
   IntegrationInvocationEvent,
 } from "@jupiterone/jupiter-managed-integration-sdk";
 import openshiftRestClient from "openshift-rest-client";
-import OpenShiftClient from "./OpenShiftClient";
+import OpenShiftClient from "./openshift/OpenShiftClient";
 import { OpenShiftExecutionContext } from "./types";
 
 export default async function initializeContext(

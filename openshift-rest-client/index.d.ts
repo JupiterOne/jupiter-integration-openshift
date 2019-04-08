@@ -44,9 +44,21 @@ declare namespace openshiftRestClient {
     (): Promise<T>;
   }
 
-  interface Group {}
+  interface Group {
+    id: string;
+    manufacturer: string;
+    uid: string;
+    namespace: string;
+    generation: number;
+    resourceVersion: string;
+  }
 
-  interface Project {}
+  interface Project {
+    firstName: string,
+    lastName: string,
+    uid: string,
+    groups: Group[],
+  }
 
   interface ListResponse<T> {
     items: T[];
