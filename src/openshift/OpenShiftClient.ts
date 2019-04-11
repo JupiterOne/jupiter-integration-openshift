@@ -1,16 +1,46 @@
-import openshiftRestClient from "openshift-rest-client";
-import { Group, Project } from "./types";
+// tslint:disable:no-var-requires
+const openshiftRestClient = require("openshift-rest-client").OpenshiftClient;
+
+import { Group, Project, User } from "./types";
 
 export default class OpenShiftClient {
-  constructor(readonly restClient: openshiftRestClient.Client) {}
+  private restClient: any;
+
+  public async authorize(
+    apiToken: string,
+    cluster: string,
+    insecureSkipTlsVerify: boolean,
+  ) {
+    const config = {
+      auth: { bearer: apiToken },
+      url: `https://${cluster}`,
+      insecureSkipTlsVerify,
+    };
+
+    this.restClient = await openshiftRestClient({ config });
+  }
 
   public async fetchGroups(): Promise<Group[]> {
-    const { items: groups } = await this.restClient.groups.findAll();
+    const {
+      body: { items: groups },
+    } = await this.restClient.apis["user.openshift.io"].v1.groups.get();
+
     return groups;
   }
 
   public async fetchProjects(): Promise<Project[]> {
-    const { items: projects } = await this.restClient.projects.findAll();
+    const {
+      body: { items: projects },
+    } = await this.restClient.apis["project.openshift.io"].v1.projects.get();
+
     return projects;
+  }
+
+  public async fetchUsers(): Promise<User[]> {
+    const {
+      body: { items: users },
+    } = await this.restClient.apis["user.openshift.io"].v1.users.get();
+
+    return users;
   }
 }

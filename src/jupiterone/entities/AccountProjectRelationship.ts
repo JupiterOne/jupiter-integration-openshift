@@ -5,5 +5,5 @@ export interface AccountProjectRelationship
   id?: number;
 }
 
-export const ACCOUNT_PROJECT_RELATIONSHIP_TYPE = "openshift_account_user";
+export const ACCOUNT_PROJECT_RELATIONSHIP_TYPE = "openshift_account_project";
 export const ACCOUNT_PROJECT_RELATIONSHIP_CLASS = "HAS";

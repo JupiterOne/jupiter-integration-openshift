@@ -13,11 +13,12 @@
 
 export = openshiftRestClient;
 
-declare function openshiftRestClient(): openshiftRestClient.Client;
+declare function openshiftRestClient(): openshiftRestClient.OpenshiftClient;
 declare function openshiftRestClient(
   settings: openshiftRestClient.Settings,
 ): openshiftRestClient.Client;
 
+// tslint:disable:no-namespace
 declare namespace openshiftRestClient {
   interface Context {
     cluster: string;
@@ -44,20 +45,37 @@ declare namespace openshiftRestClient {
     (): Promise<T>;
   }
 
-  interface Group {
-    id: string;
-    manufacturer: string;
+  interface Metadata {
     uid: string;
-    namespace: string;
-    generation: number;
+    name: string;
+    selfLink: string;
     resourceVersion: string;
+    creationTimestamp: string;
+    namespace?: string;
+    generation?: number;
+    annotations?: string[];
+    labels?: string[];
+  }
+
+  interface Group {
+    metadata: Metadata;
+    users: string[]
+  }
+
+  interface User {
+    metadata: Metadata;
+    fullName: string;
+    groups: string[];
   }
 
   interface Project {
-    firstName: string,
-    lastName: string,
-    uid: string,
-    groups: Group[],
+    metadata: Metadata;
+    spec: {
+      finalizers: string[];
+    };
+    status: {
+      phase: string
+    };
   }
 
   interface ListResponse<T> {
@@ -71,5 +89,6 @@ declare namespace openshiftRestClient {
   export interface Client {
     groups: ListEndpoint<Group>;
     projects: ListEndpoint<Project>;
+    users: ListEndpoint<User>;
   }
 }

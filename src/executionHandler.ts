@@ -18,13 +18,13 @@ export default async function executionHandler(
   );
 
   const oldData = await fetchEntitiesAndRelationships(graph);
-  const oneLoginData = await fetchOpenshiftData(openshift);
+  const openshiftData = await fetchOpenshiftData(openshift);
 
   return {
     operations: await publishChanges(
       persister,
       oldData,
-      oneLoginData,
+      openshiftData,
       instance,
     ),
   };

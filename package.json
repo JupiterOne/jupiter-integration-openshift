@@ -22,9 +22,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/openshift-rest-client": "./openshift-rest-client/",
     "bunyan": "^1.8.12",
-    "openshift-rest-client": "^1.6.4"
+    "openshift-rest-client": "^2.1.0"
   },
   "peerDependencies": {
     "@jupiterone/jupiter-managed-integration-sdk": "^21.0.1"

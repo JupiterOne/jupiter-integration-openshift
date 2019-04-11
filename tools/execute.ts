@@ -11,9 +11,8 @@ async function run(): Promise<void> {
 
   const integrationConfig = {
     cluster: process.env.OPENSHIFT_LOCAL_EXECUTION_CLUSTER,
-    namespace: process.env.OPENSHIFT_LOCAL_EXECUTION_NAMESPACE,
-    user: process.env.OPENSHIFT_LOCAL_EXECUTION_USER,
     apiToken: process.env.OPENSHIFT_LOCAL_EXECUTION_API_TOKEN,
+    insecureSkipTlsVerify: true,
   };
 
   const invocationArgs = {};

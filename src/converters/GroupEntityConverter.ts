@@ -12,13 +12,14 @@ export function createGroupEntities(data: Group[]): GroupEntity[] {
   return data.map(d => {
     const group: GroupEntity = {
       _class: GROUP_ENTITY_CLASS,
-      _key: generateEntityKey(GROUP_ENTITY_TYPE, d.id),
+      _key: generateEntityKey(GROUP_ENTITY_TYPE, d.metadata.uid),
       _type: GROUP_ENTITY_TYPE,
-      displayName: d.manufacturer,
-      uid: d.uid,
-      namespace: d.namespace,
-      generation: d.generation,
-      resourceVersion: d.resourceVersion,
+      displayName: d.metadata.name,
+      uid: d.metadata.uid,
+      namespace: d.metadata.namespace,
+      generation: d.metadata.generation,
+      resourceVersion: d.metadata.resourceVersion,
+      creationTimestamp: d.metadata.creationTimestamp,
     };
     return group;
   });

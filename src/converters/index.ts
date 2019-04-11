@@ -1,6 +1,7 @@
 export { createAccountEntity } from "./AccountEntityConverter";
 export { createGroupEntities } from "./GroupEntityConverter";
 export { createProjectEntities } from "./ProjectEntityConverter";
+export { createUserEntities } from "./UserEntityConverter";
 
 export {
   createAccountGroupRelationships,
@@ -8,3 +9,4 @@ export {
 export {
   createAccountProjectRelationships,
 } from "./AccountProjectRelationshipConverter";
+export { createUserGroupRelationships } from "./UserGroupRelationshipConverter";

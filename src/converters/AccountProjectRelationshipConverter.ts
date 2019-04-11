@@ -1,7 +1,6 @@
 import { Project } from "../openshift/types";
 
 import {
-  ACCOUNT_ENTITY_TYPE,
   ACCOUNT_PROJECT_RELATIONSHIP_CLASS,
   ACCOUNT_PROJECT_RELATIONSHIP_TYPE,
   AccountEntity,
@@ -21,8 +20,11 @@ export function createAccountProjectRelationships(
   const defaultValue: AccountProjectRelationship[] = [];
 
   return projects.reduce((acc, project) => {
-    const parentKey = generateEntityKey(ACCOUNT_ENTITY_TYPE, account._key);
-    const childKey = generateEntityKey(PROJECT_ENTITY_TYPE, project.uid);
+    const parentKey = account._key;
+    const childKey = generateEntityKey(
+      PROJECT_ENTITY_TYPE,
+      project.metadata.uid,
+    );
     const key = generateRelationshipKey(
       parentKey,
       childKey,

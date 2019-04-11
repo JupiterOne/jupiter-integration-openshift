@@ -1,7 +1,6 @@
 import { Group } from "../openshift/types";
 
 import {
-  ACCOUNT_ENTITY_TYPE,
   ACCOUNT_GROUP_RELATIONSHIP_CLASS,
   ACCOUNT_GROUP_RELATIONSHIP_TYPE,
   AccountEntity,
@@ -21,8 +20,8 @@ export function createAccountGroupRelationships(
   const defaultValue: AccountGroupRelationship[] = [];
 
   return groups.reduce((acc, group) => {
-    const parentKey = generateEntityKey(ACCOUNT_ENTITY_TYPE, account._key);
-    const childKey = generateEntityKey(GROUP_ENTITY_TYPE, group.id);
+    const parentKey = account._key;
+    const childKey = generateEntityKey(GROUP_ENTITY_TYPE, group.metadata.uid);
     const key = generateRelationshipKey(
       parentKey,
       childKey,

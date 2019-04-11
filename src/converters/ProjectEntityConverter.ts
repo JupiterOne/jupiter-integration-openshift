@@ -11,11 +11,16 @@ export function createProjectEntities(data: Project[]): ProjectEntity[] {
   return data.map(d => {
     const project: ProjectEntity = {
       _class: PROJECT_ENTITY_CLASS,
-      _key: generateEntityKey(PROJECT_ENTITY_TYPE, d.uid),
+      _key: generateEntityKey(PROJECT_ENTITY_TYPE, d.metadata.uid),
       _type: PROJECT_ENTITY_TYPE,
-      displayName: `${d.firstName} ${d.lastName}`,
-      uid: d.uid,
+      displayName: d.metadata.name,
+      uid: d.metadata.uid,
+      namespace: d.metadata.namespace,
+      generation: d.metadata.generation,
+      resourceVersion: d.metadata.resourceVersion,
+      creationTimestamp: d.metadata.creationTimestamp,
     };
+
     return project;
   });
 }

@@ -11,11 +11,12 @@ import {
   createAccountProjectRelationships,
   createGroupEntities,
   createProjectEntities,
+  createUserEntities,
+  createUserGroupRelationships,
 } from "../converters";
 
 import { IntegrationInstance } from "@jupiterone/jupiter-managed-integration-sdk";
 import {
-  AccountEntity,
   JupiterOneDataModel,
   JupiterOneEntitiesData,
   JupiterOneRelationshipsData,
@@ -29,10 +30,10 @@ type RelationshipsKeys = keyof JupiterOneRelationshipsData;
 export default async function publishChanges(
   persister: PersisterClient,
   oldData: JupiterOneDataModel,
-  oneLoginData: OpenshiftDataModel,
+  openshiftData: OpenshiftDataModel,
   instance: IntegrationInstance,
 ) {
-  const newData = convert(oneLoginData, instance);
+  const newData = convert(openshiftData, instance);
 
   const entities = createEntitiesOperations(
     oldData.entities,
@@ -92,42 +93,48 @@ function createRelationshipsOperations(
 }
 
 export function convert(
-  oneLoginDataModel: OpenshiftDataModel,
+  openshiftDataModel: OpenshiftDataModel,
   instance: IntegrationInstance,
 ): JupiterOneDataModel {
-  const entities = convertEntities(oneLoginDataModel, instance);
+  const entities = convertEntities(openshiftDataModel, instance);
+  const relationships = convertRelationships(openshiftDataModel, entities);
+
   return {
-    entities: convertEntities(oneLoginDataModel, instance),
-    relationships: convertRelationships(
-      oneLoginDataModel,
-      entities.accounts[0],
-    ),
+    entities,
+    relationships,
   };
 }
 
 export function convertEntities(
-  oneLoginDataModel: OpenshiftDataModel,
+  openshiftDataModel: OpenshiftDataModel,
   instance: IntegrationInstance,
 ): JupiterOneEntitiesData {
   return {
     accounts: [createAccountEntity(instance)],
-    groups: createGroupEntities(oneLoginDataModel.groups),
-    projects: createProjectEntities(oneLoginDataModel.projects),
+    groups: createGroupEntities(openshiftDataModel.groups),
+    projects: createProjectEntities(openshiftDataModel.projects),
+    users: createUserEntities(openshiftDataModel.users),
   };
 }
 
 export function convertRelationships(
-  oneLoginDataModel: OpenshiftDataModel,
-  account: AccountEntity,
+  openshiftDataModel: OpenshiftDataModel,
+  entities: JupiterOneEntitiesData,
 ): JupiterOneRelationshipsData {
+  const account = entities.accounts[0];
+
   return {
     accountGroupRelationships: createAccountGroupRelationships(
-      oneLoginDataModel.groups,
+      openshiftDataModel.groups,
       account,
     ),
     accountProjectRelationships: createAccountProjectRelationships(
-      oneLoginDataModel.projects,
+      openshiftDataModel.projects,
       account,
+    ),
+    userGroupRelationships: createUserGroupRelationships(
+      openshiftDataModel.groups,
+      openshiftDataModel.users,
     ),
   };
 }
