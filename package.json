@@ -15,6 +15,7 @@
     "build:files": "ts-node tools/copy-dist-files.ts",
     "build:types": "tsc --project tsconfig.dist.json --declaration --emitDeclarationOnly",
     "build:publish": "yarn build && cd dist && yarn publish --access public",
+    "build:docs:model": "ts-node tools/entities-relationships-table-md.ts",
     "lint": "yarn lint:ts && yarn lint:md",
     "lint:md": "remark .",
     "lint:ts": "tslint --project .",
