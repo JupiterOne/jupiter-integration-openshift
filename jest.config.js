@@ -5,6 +5,7 @@ module.exports = {
   testMatch: ["<rootDir>/src/**/*.test.{js,ts}"],
   collectCoverageFrom: [
     "src/**/*.ts",
+    "!src/**/index.ts",
     "!src/index.ts",
     "!src/OpenShiftClient.ts",
     "!src/converters.ts",

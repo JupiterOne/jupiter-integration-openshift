@@ -8,7 +8,9 @@ interface Metadata {
   creationTimestamp: string;
   namespace?: string;
   generation?: number;
-  annotations?: string[];
+  annotations?: {
+    [url: string]: string;
+  };
   labels?: string[];
 }
 
@@ -19,8 +21,8 @@ export interface Group {
 
 export interface User {
   metadata: Metadata;
-  fullName: string;
-  groups: string[];
+  fullName?: string;
+  groups?: string[] | null;
 }
 
 export interface Project {

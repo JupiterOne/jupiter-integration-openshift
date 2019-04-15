@@ -1,0 +1,53 @@
+[
+  {
+    "scope": "https://192.168.64.3:8443",
+    "method": "GET",
+    "path": "/apis/user.openshift.io/v1/groups",
+    "body": "",
+    "status": 200,
+    "response": {
+      "kind": "GroupList",
+      "apiVersion": "user.openshift.io/v1",
+      "metadata": {
+        "selfLink": "/apis/user.openshift.io/v1/groups",
+        "resourceVersion": "101226"
+      },
+      "items": [
+        {
+          "metadata": {
+            "name": "first-group",
+            "selfLink": "/apis/user.openshift.io/v1/groups/first-group",
+            "uid": "259b87ab-5c46-11e9-82b7-4e620801d617",
+            "resourceVersion": "34739",
+            "creationTimestamp": "2019-04-11T10:39:55Z"
+          },
+          "users": ["test-user"]
+        },
+        {
+          "metadata": {
+            "name": "second-group",
+            "selfLink": "/apis/user.openshift.io/v1/groups/second-group",
+            "uid": "2aafc5a6-5c46-11e9-82b7-4e620801d617",
+            "resourceVersion": "34775",
+            "creationTimestamp": "2019-04-11T10:40:04Z"
+          },
+          "users": ["second-test-user"]
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Cache-Control",
+      "no-store",
+      "Cache-Control",
+      "no-store",
+      "Content-Length",
+      "625",
+      "Content-Type",
+      "application/json",
+      "Date",
+      "Mon, 15 Apr 2019 16:53:22 GMT",
+      "Connection",
+      "close"
+    ]
+  }
+]

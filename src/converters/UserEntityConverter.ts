@@ -11,7 +11,7 @@ export function createUserEntities(data: User[]): UserEntity[] {
       _type: USER_ENTITY_TYPE,
       displayName: u.metadata.name,
       uid: u.metadata.uid,
-      fullName: u.fullName,
+      fullName: u.fullName || "",
       generation: u.metadata.generation,
       resourceVersion: u.metadata.resourceVersion,
       creationTimestamp: u.metadata.creationTimestamp,

@@ -6,7 +6,7 @@ import { Group, Project, User } from "./types";
 export default class OpenShiftClient {
   private restClient: any;
 
-  public async authorize(
+  public async authenticate(
     apiToken: string,
     cluster: string,
     insecureSkipTlsVerify: boolean,

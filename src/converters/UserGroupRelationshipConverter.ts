@@ -19,15 +19,13 @@ interface UserDict {
 
 export function createUserGroupRelationships(groups: Group[], users: User[]) {
   const usersDict: UserDict = users.reduce((dict, user) => {
-    return { ...dict, [user.metadata.uid]: user };
+    return { ...dict, [user.metadata.name]: user };
   }, {});
 
   return groups.reduce(
     (relationships, group) => {
       const groupUsers = group.users.reduce(
         (groupUsersRelationships, userName) => {
-          // if (!usersDict[userName]) { return groupUsersRelationships };
-
           const parentKey = generateEntityKey(
             USER_ENTITY_TYPE,
             usersDict[userName].metadata.uid,
@@ -52,11 +50,11 @@ export function createUserGroupRelationships(groups: Group[], users: User[]) {
 
           return [...groupUsersRelationships, relationship];
         },
-        {} as UserGroupRelationship[],
+        [] as UserGroupRelationship[],
       );
 
       return [...relationships, ...groupUsers];
     },
-    {} as UserGroupRelationship[],
+    [] as UserGroupRelationship[],
   );
 }

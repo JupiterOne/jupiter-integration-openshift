@@ -13,7 +13,7 @@ export default async function initializeContext(
   } = context;
 
   const openshift = new OpenShiftClient();
-  await openshift.authorize(
+  await openshift.authenticate(
     config.apiToken,
     config.cluster,
     config.insecureSkipTlsVerify === true,

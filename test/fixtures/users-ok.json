@@ -1,0 +1,79 @@
+[
+  {
+    "scope": "https://192.168.64.3:8443",
+    "method": "GET",
+    "path": "/apis/user.openshift.io/v1/users",
+    "body": "",
+    "status": 200,
+    "response": {
+      "kind": "UserList",
+      "apiVersion": "user.openshift.io/v1",
+      "metadata": {
+        "selfLink": "/apis/user.openshift.io/v1/users",
+        "resourceVersion": "101226"
+      },
+      "items": [
+        {
+          "metadata": {
+            "name": "developer",
+            "selfLink": "/apis/user.openshift.io/v1/users/developer",
+            "uid": "ad550b5e-5bb8-11e9-a9f5-4e620801d617",
+            "resourceVersion": "2142",
+            "creationTimestamp": "2019-04-10T17:47:15Z"
+          },
+          "identities": ["anypassword:developer"],
+          "groups": null
+        },
+        {
+          "metadata": {
+            "name": "second-test-user",
+            "selfLink": "/apis/user.openshift.io/v1/users/second-test-user",
+            "uid": "f79957a7-5c45-11e9-82b7-4e620801d617",
+            "resourceVersion": "47230",
+            "creationTimestamp": "2019-04-11T10:38:38Z"
+          },
+          "fullName": "Second Test",
+          "identities": null,
+          "groups": null
+        },
+        {
+          "metadata": {
+            "name": "test-user",
+            "selfLink": "/apis/user.openshift.io/v1/users/test-user",
+            "uid": "eabd5afd-5c45-11e9-82b7-4e620801d617",
+            "resourceVersion": "47231",
+            "creationTimestamp": "2019-04-11T10:38:17Z"
+          },
+          "fullName": "User Test",
+          "identities": null,
+          "groups": null
+        },
+        {
+          "metadata": {
+            "name": "third-test-user",
+            "selfLink": "/apis/user.openshift.io/v1/users/third-test-user",
+            "uid": "fa1713bf-5c45-11e9-82b7-4e620801d617",
+            "resourceVersion": "34443",
+            "creationTimestamp": "2019-04-11T10:38:42Z"
+          },
+          "identities": null,
+          "groups": null
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Cache-Control",
+      "no-store",
+      "Cache-Control",
+      "no-store",
+      "Content-Length",
+      "1190",
+      "Content-Type",
+      "application/json",
+      "Date",
+      "Mon, 15 Apr 2019 16:53:22 GMT",
+      "Connection",
+      "close"
+    ]
+  }
+]
