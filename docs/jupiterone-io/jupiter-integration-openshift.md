@@ -2,14 +2,12 @@
 
 ## Overview
 
-JupiterOne provides a managed integration with Openshift. The integration
-connects directly to Openshift APIs to obtain cluster metadata and analyze
-resource relationships.
+JupiterOne provides a managed integration with Openshift. The integration connects directly to Openshift APIs to obtain cluster metadata and
+analyze resource relationships.
 
 ## Integration Instance Configuration
 
-To perform a sync, you should use a specific Service Account. To create that in
-follow this instruction.
+To perform a sync, you should use a specific Service Account. To create that in follow this instruction.
 
 Login as admin:
 
@@ -30,26 +28,36 @@ Get service account token:
 oc serviceaccounts get-token jupiterone
 ```
 
-The integration instance configuration requires cluster address and an service
-account token.
+The integration instance configuration requires cluster address and an service account token.
 
 ## Entities
 
 The following entity resources are ingested when the integration runs:
 
-| Openshift Resource | \_type of the Entity   | \_class of the Entity |
-| ------------------ | ---------------------- | --------------------- |
-| Group              | `openshift_user_group` | `UserGroup`           |
-| Project            | `openshift_project`    | `Project`             |
-| User               | `openshift_user`       | `User`                |
-| Account            | `openshift_account`    | `Account`             |
+| Openshift Resource | \_type of the Entity        | \_class of the Entity |
+| ------------------ | --------------------------- | --------------------- |
+| Account            | `openshift_account`         | `Account`             |
+| Container          | `openshift_container`       | `Task`                |
+| Group              | `openshift_user_group`      | `UserGroup`           |
+| Pod                | `openshift_pod`             | `Task`                |
+| Project            | `openshift_project`         | `Project`             |
+| Route              | `openshift_route`           | `Domain`              |
+| Service Account    | `openshift_service_account` | `User`                |
+| Service            | `openshift_service`         | `Task`                |
+| User               | `openshift_user`            | `User`                |
 
 ## Relationships
 
 The following relationships are created/mapped:
 
-| From                | Type         | To                     |
-| ------------------- | ------------ | ---------------------- |
-| `openshift_account` | **HAS**      | `openshift_project`    |
-| `openshift_account` | **HAS**      | `openshift_user_group` |
-| `openshift_user`    | **ASSIGNED** | `openshift_user_group` |
+| From                | Type         | To                          |
+| ------------------- | ------------ | --------------------------- |
+| `openshift_account` | **HAS**      | `openshift_user_group`      |
+| `openshift_account` | **HAS**      | `openshift_project`         |
+| `openshift_project` | **HAS**      | `openshift_route`           |
+| `openshift_project` | **HAS**      | `openshift_service_account` |
+| `openshift_project` | **HAS**      | `openshift_service`         |
+| `openshift_pod`     | **HAS**      | `openshift_container`       |
+| `openshift_route`   | **EXTENDS**  | `openshift_service`         |
+| `openshift_service` | **HAS**      | `openshift_pod`             |
+| `openshift_user`    | **ASSIGNED** | `openshift_user_group`      |

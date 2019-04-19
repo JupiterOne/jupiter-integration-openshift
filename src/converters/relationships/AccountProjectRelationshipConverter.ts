@@ -1,4 +1,4 @@
-import { Project } from "../openshift/types";
+import { Project } from "../../openshift/types";
 
 import {
   ACCOUNT_PROJECT_RELATIONSHIP_CLASS,
@@ -6,30 +6,17 @@ import {
   AccountEntity,
   AccountProjectRelationship,
   PROJECT_ENTITY_TYPE,
-} from "../jupiterone";
+} from "../../jupiterone";
 
-import {
-  generateEntityKey,
-  generateRelationshipKey,
-} from "../utils/generateKeys";
+import { generateEntityKey, generateRelationshipKey } from "../../utils/generateKeys";
 
-export function createAccountProjectRelationships(
-  projects: Project[],
-  account: AccountEntity,
-) {
+export function createAccountProjectRelationships(projects: Project[], account: AccountEntity): AccountProjectRelationship[] {
   const defaultValue: AccountProjectRelationship[] = [];
 
   return projects.reduce((acc, project) => {
     const parentKey = account._key;
-    const childKey = generateEntityKey(
-      PROJECT_ENTITY_TYPE,
-      project.metadata.uid,
-    );
-    const key = generateRelationshipKey(
-      parentKey,
-      childKey,
-      ACCOUNT_PROJECT_RELATIONSHIP_CLASS,
-    );
+    const childKey = generateEntityKey(PROJECT_ENTITY_TYPE, project.metadata.uid);
+    const key = generateRelationshipKey(parentKey, childKey, ACCOUNT_PROJECT_RELATIONSHIP_CLASS);
 
     const relationship: AccountProjectRelationship = {
       _class: ACCOUNT_PROJECT_RELATIONSHIP_CLASS,

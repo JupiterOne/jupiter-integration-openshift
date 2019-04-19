@@ -1,7 +1,4 @@
-import {
-  IntegrationInstanceAuthenticationError,
-  IntegrationInstanceConfigError,
-} from "@jupiterone/jupiter-managed-integration-sdk";
+import { IntegrationInstanceAuthenticationError, IntegrationInstanceConfigError } from "@jupiterone/jupiter-managed-integration-sdk";
 import invocationValidator from "./invocationValidator";
 
 it("should reject", async () => {

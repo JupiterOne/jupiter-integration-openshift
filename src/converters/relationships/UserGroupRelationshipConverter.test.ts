@@ -1,6 +1,6 @@
 import { createUserGroupRelationships } from "./UserGroupRelationshipConverter";
 
-test("convert user group relationships", async () => {
+test("convert user -> group relationships", async () => {
   const users = [
     {
       metadata: {
@@ -57,8 +57,7 @@ test("convert user group relationships", async () => {
     {
       _class: "ASSIGNED",
       _fromEntityKey: "openshift_user_eabd5afd-5c45-11e9-82b7-4e620801d617",
-      _key:
-        "openshift_user_eabd5afd-5c45-11e9-82b7-4e620801d617_assigned_openshift_user_group_259b87ab-5c46-11e9-82b7-4e620801d617",
+      _key: "openshift_user_eabd5afd-5c45-11e9-82b7-4e620801d617_assigned_openshift_user_group_259b87ab-5c46-11e9-82b7-4e620801d617",
       _toEntityKey: "openshift_user_group_259b87ab-5c46-11e9-82b7-4e620801d617",
       _type: "openshift_user_assigned_group",
     },

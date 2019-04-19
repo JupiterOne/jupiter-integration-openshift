@@ -39,8 +39,33 @@ beforeEach(() => {
   openshiftClient = ({
     authenticate: jest.fn().mockReturnValue([]),
     fetchGroups: jest.fn().mockReturnValue([]),
-    fetchProjects: jest.fn().mockReturnValue([]),
+    fetchProjects: jest.fn().mockReturnValue([
+      {
+        metadata: {
+          name: "default",
+          selfLink: "/apis/project.openshift.io/v1/projects/default",
+          uid: "39537998-5bb8-11e9-8c30-4e620801d617",
+          resourceVersion: "1284",
+          creationTimestamp: "2019-04-10T17:44:00Z",
+          annotations: {
+            "openshift.io/sa.scc.mcs": "s0:c7,c4",
+            "openshift.io/sa.scc.supplemental-groups": "1000050000/10000",
+            "openshift.io/sa.scc.uid-range": "1000050000/10000",
+          },
+        },
+        spec: {
+          finalizers: ["kubernetes"],
+        },
+        status: {
+          phase: "Active",
+        },
+      },
+    ]),
     fetchUsers: jest.fn().mockReturnValue([]),
+    fetchNamespaceServiceAccounts: jest.fn().mockReturnValue([]),
+    fetchNamespaceRoutes: jest.fn().mockReturnValue([]),
+    fetchNamespacePods: jest.fn().mockReturnValue([]),
+    fetchNamespaceServices: jest.fn().mockReturnValue([]),
   } as unknown) as OpenShiftClient;
 
   executionContext = ({
@@ -61,12 +86,13 @@ beforeEach(() => {
 
 describe("INGEST", () => {
   test("all openshift data", async () => {
-    (openshiftClient.fetchProjects as jest.Mock).mockResolvedValue([]);
-
     await executionHandler(executionContext);
 
     expect(openshiftClient.fetchGroups).toHaveBeenCalledTimes(1);
     expect(openshiftClient.fetchProjects).toHaveBeenCalledTimes(1);
-    expect(openshiftClient.fetchUsers).toHaveBeenCalledTimes(1);
+    expect(openshiftClient.fetchNamespaceServiceAccounts).toHaveBeenCalledTimes(1);
+    expect(openshiftClient.fetchNamespaceRoutes).toHaveBeenCalledTimes(1);
+    expect(openshiftClient.fetchNamespacePods).toHaveBeenCalledTimes(1);
+    expect(openshiftClient.fetchNamespaceServices).toHaveBeenCalledTimes(1);
   });
 });

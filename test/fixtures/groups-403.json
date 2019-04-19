@@ -1,0 +1,36 @@
+[
+  {
+    "scope": "https://api.starter-us-west-2.openshift.com:443",
+    "method": "GET",
+    "path": "/apis/user.openshift.io/v1/groups",
+    "body": "",
+    "status": 403,
+    "response": {
+      "kind": "Status",
+      "apiVersion": "v1",
+      "metadata": {},
+      "status": "Failure",
+      "message": "groups.user.openshift.io is forbidden: User \"andrew.dualboot\" cannot list groups.user.openshift.io at the cluster scope: no RBAC policy matched",
+      "reason": "Forbidden",
+      "details": {
+        "group": "user.openshift.io",
+        "kind": "groups"
+      },
+      "code": 403
+    },
+    "rawHeaders": [
+      "Cache-Control",
+      "no-store",
+      "Content-Type",
+      "application/json",
+      "X-Content-Type-Options",
+      "nosniff",
+      "Date",
+      "Fri, 19 Apr 2019 16:11:20 GMT",
+      "Content-Length",
+      "315",
+      "Connection",
+      "close"
+    ]
+  }
+]

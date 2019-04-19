@@ -1,7 +1,4 @@
-import {
-  IntegrationExecutionContext,
-  IntegrationInvocationEvent,
-} from "@jupiterone/jupiter-managed-integration-sdk";
+import { IntegrationExecutionContext, IntegrationInvocationEvent } from "@jupiterone/jupiter-managed-integration-sdk";
 import OpenShiftClient from "./openshift/OpenShiftClient";
 import { OpenShiftExecutionContext } from "./types";
 
@@ -13,11 +10,7 @@ export default async function initializeContext(
   } = context;
 
   const openshift = new OpenShiftClient();
-  await openshift.authenticate(
-    config.apiToken,
-    config.cluster,
-    config.insecureSkipTlsVerify === true,
-  );
+  await openshift.authenticate(config.apiToken, config.cluster, config.insecureSkipTlsVerify === true);
 
   return {
     ...context,

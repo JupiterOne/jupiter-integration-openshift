@@ -1,0 +1,153 @@
+[
+  {
+    "scope": "https://api.starter-us-west-2.openshift.com:443",
+    "method": "GET",
+    "path": "/api/v1/namespaces/example_namespace/serviceaccounts",
+    "body": "",
+    "status": 200,
+    "response": {
+      "kind": "ServiceAccountList",
+      "apiVersion": "v1",
+      "metadata": {
+        "selfLink": "/api/v1/namespaces/example_namespace/serviceaccounts",
+        "resourceVersion": "3549060123"
+      },
+      "items": [
+        {
+          "metadata": {
+            "name": "builder",
+            "namespace": "example_namespace",
+            "selfLink": "/api/v1/namespaces/example_namespace/serviceaccounts/builder",
+            "uid": "c077817b-61bf-11e9-b220-0a2a2b777307",
+            "resourceVersion": "3548833510",
+            "creationTimestamp": "2019-04-18T09:53:00Z"
+          },
+          "secrets": [
+            {
+              "name": "builder-token-xpqbv"
+            },
+            {
+              "name": "builder-dockercfg-5wqq7"
+            }
+          ],
+          "imagePullSecrets": [
+            {
+              "name": "builder-dockercfg-5wqq7"
+            }
+          ]
+        },
+        {
+          "metadata": {
+            "name": "default",
+            "namespace": "example_namespace",
+            "selfLink": "/api/v1/namespaces/example_namespace/serviceaccounts/default",
+            "uid": "c0777bca-61bf-11e9-b220-0a2a2b777307",
+            "resourceVersion": "3548833514",
+            "creationTimestamp": "2019-04-18T09:53:00Z"
+          },
+          "secrets": [
+            {
+              "name": "default-token-twm6h"
+            },
+            {
+              "name": "default-dockercfg-8hn4t"
+            }
+          ],
+          "imagePullSecrets": [
+            {
+              "name": "default-dockercfg-8hn4t"
+            }
+          ]
+        },
+        {
+          "metadata": {
+            "name": "deployer",
+            "namespace": "example_namespace",
+            "selfLink": "/api/v1/namespaces/example_namespace/serviceaccounts/deployer",
+            "uid": "c078c14b-61bf-11e9-b220-0a2a2b777307",
+            "resourceVersion": "3548833518",
+            "creationTimestamp": "2019-04-18T09:53:00Z"
+          },
+          "secrets": [
+            {
+              "name": "deployer-token-s4c9b"
+            },
+            {
+              "name": "deployer-dockercfg-cbnkt"
+            }
+          ],
+          "imagePullSecrets": [
+            {
+              "name": "deployer-dockercfg-cbnkt"
+            }
+          ]
+        },
+        {
+          "metadata": {
+            "name": "jenkins",
+            "namespace": "example_namespace",
+            "selfLink": "/api/v1/namespaces/example_namespace/serviceaccounts/jenkins",
+            "uid": "c3cb6727-61bf-11e9-ad62-0a69cdf75e6f",
+            "resourceVersion": "3548833679",
+            "creationTimestamp": "2019-04-18T09:53:06Z",
+            "labels": {
+              "app": "jenkins-persistent",
+              "template": "jenkins-persistent-template"
+            },
+            "annotations": {
+              "serviceaccounts.openshift.io/oauth-redirectreference.jenkins": "{\"kind\":\"OAuthRedirectReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"Route\",\"name\":\"jenkins\"}}"
+            }
+          },
+          "secrets": [
+            {
+              "name": "jenkins-token-w64vt"
+            },
+            {
+              "name": "jenkins-dockercfg-vbsxs"
+            }
+          ],
+          "imagePullSecrets": [
+            {
+              "name": "jenkins-dockercfg-vbsxs"
+            }
+          ]
+        },
+        {
+          "metadata": {
+            "name": "jupiterone",
+            "namespace": "example_namespace",
+            "selfLink": "/api/v1/namespaces/example_namespace/serviceaccounts/jupiterone",
+            "uid": "8426f6b4-61c5-11e9-9c2a-0ab8769191d3",
+            "resourceVersion": "3548891286",
+            "creationTimestamp": "2019-04-18T10:34:16Z"
+          },
+          "secrets": [
+            {
+              "name": "jupiterone-token-5bl8x"
+            },
+            {
+              "name": "jupiterone-dockercfg-j7vh2"
+            }
+          ],
+          "imagePullSecrets": [
+            {
+              "name": "jupiterone-dockercfg-j7vh2"
+            }
+          ]
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Cache-Control",
+      "no-store",
+      "Content-Type",
+      "application/json",
+      "Date",
+      "Thu, 18 Apr 2019 12:29:14 GMT",
+      "Connection",
+      "close",
+      "Transfer-Encoding",
+      "chunked"
+    ]
+  }
+]

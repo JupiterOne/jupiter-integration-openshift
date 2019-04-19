@@ -1,7 +1,7 @@
-import { USER_ENTITY_CLASS, USER_ENTITY_TYPE, UserEntity } from "../jupiterone";
-import { User } from "../openshift/types";
+import { USER_ENTITY_CLASS, USER_ENTITY_TYPE, UserEntity } from "../../jupiterone";
+import { User } from "../../openshift/types";
 
-import { generateEntityKey } from "../utils/generateKeys";
+import { generateEntityKey } from "../../utils/generateKeys";
 
 export function createUserEntities(data: User[]): UserEntity[] {
   return data.map(u => {

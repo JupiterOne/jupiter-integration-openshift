@@ -1,12 +1,8 @@
-import {
-  GROUP_ENTITY_CLASS,
-  GROUP_ENTITY_TYPE,
-  GroupEntity,
-} from "../jupiterone";
+import { GROUP_ENTITY_CLASS, GROUP_ENTITY_TYPE, GroupEntity } from "../../jupiterone";
 
-import { Group } from "../openshift/types";
+import { Group } from "../../openshift/types";
 
-import { generateEntityKey } from "../utils/generateKeys";
+import { generateEntityKey } from "../../utils/generateKeys";
 
 export function createGroupEntities(data: Group[]): GroupEntity[] {
   return data.map(d => {
