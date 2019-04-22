@@ -1,0 +1,80 @@
+[
+  {
+    "scope": "https://api.starter-us-west-2.openshift.com:443",
+    "method": "GET",
+    "path": "/apis/route.openshift.io/v1/namespaces/example_namespace/routes",
+    "body": "",
+    "status": 200,
+    "response": {
+      "kind": "RouteList",
+      "apiVersion": "route.openshift.io/v1",
+      "metadata": {
+        "selfLink": "/apis/route.openshift.io/v1/namespaces/example_namespace/routes",
+        "resourceVersion": "3549550981"
+      },
+      "items": [
+        {
+          "metadata": {
+            "name": "jenkins",
+            "namespace": "example_namespace",
+            "selfLink": "/apis/route.openshift.io/v1/namespaces/example_namespace/routes/jenkins",
+            "uid": "c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
+            "resourceVersion": "3548833669",
+            "creationTimestamp": "2019-04-18T09:53:06Z",
+            "labels": {
+              "app": "jenkins-persistent",
+              "template": "jenkins-persistent-template"
+            },
+            "annotations": {
+              "haproxy.router.openshift.io/timeout": "4m",
+              "openshift.io/host.generated": "true",
+              "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
+            }
+          },
+          "spec": {
+            "host": "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
+            "to": {
+              "kind": "Service",
+              "name": "jenkins",
+              "weight": 100
+            },
+            "tls": {
+              "termination": "edge",
+              "insecureEdgeTerminationPolicy": "Redirect"
+            },
+            "wildcardPolicy": "None"
+          },
+          "status": {
+            "ingress": [
+              {
+                "host": "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
+                "routerName": "router",
+                "conditions": [
+                  {
+                    "type": "Admitted",
+                    "status": "True",
+                    "lastTransitionTime": "2019-04-18T09:53:06Z"
+                  }
+                ],
+                "wildcardPolicy": "None",
+                "routerCanonicalHostname": "elb.7e14.starter-us-west-2.openshiftapps.com"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Cache-Control",
+      "no-store",
+      "Content-Type",
+      "application/json",
+      "Date",
+      "Thu, 18 Apr 2019 18:12:38 GMT",
+      "Content-Length",
+      "1271",
+      "Connection",
+      "close"
+    ]
+  }
+]

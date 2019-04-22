@@ -1,0 +1,335 @@
+[
+  {
+    "scope": "https://192.168.64.3:8443",
+    "method": "GET",
+    "path": "/apis/project.openshift.io/v1/projects",
+    "body": "",
+    "status": 200,
+    "response": {
+      "kind": "ProjectList",
+      "apiVersion": "project.openshift.io/v1",
+      "metadata": {
+        "selfLink": "/apis/project.openshift.io/v1/projects"
+      },
+      "items": [
+        {
+          "metadata": {
+            "name": "default",
+            "selfLink": "/apis/project.openshift.io/v1/projects/default",
+            "uid": "39537998-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1284",
+            "creationTimestamp": "2019-04-10T17:44:00Z",
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c7,c4",
+              "openshift.io/sa.scc.supplemental-groups": "1000050000/10000",
+              "openshift.io/sa.scc.uid-range": "1000050000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "kube-dns",
+            "selfLink": "/apis/project.openshift.io/v1/projects/kube-dns",
+            "uid": "3c83209a-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1244",
+            "creationTimestamp": "2019-04-10T17:44:05Z",
+            "labels": {
+              "openshift.io/run-level": "1"
+            },
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"creationTimestamp\":null,\"labels\":{\"openshift.io/run-level\":\"1\"},\"name\":\"kube-dns\",\"namespace\":\"\"},\"spec\":{},\"status\":{}}\n",
+              "openshift.io/sa.scc.mcs": "s0:c5,c0",
+              "openshift.io/sa.scc.supplemental-groups": "1000020000/10000",
+              "openshift.io/sa.scc.uid-range": "1000020000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "kube-proxy",
+            "selfLink": "/apis/project.openshift.io/v1/projects/kube-proxy",
+            "uid": "3c54a507-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1217",
+            "creationTimestamp": "2019-04-10T17:44:05Z",
+            "labels": {
+              "openshift.io/run-level": "1"
+            },
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"creationTimestamp\":null,\"labels\":{\"openshift.io/run-level\":\"1\"},\"name\":\"kube-proxy\",\"namespace\":\"\"},\"spec\":{},\"status\":{}}\n",
+              "openshift.io/sa.scc.mcs": "s0:c3,c2",
+              "openshift.io/sa.scc.supplemental-groups": "1000010000/10000",
+              "openshift.io/sa.scc.uid-range": "1000010000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "kube-public",
+            "selfLink": "/apis/project.openshift.io/v1/projects/kube-public",
+            "uid": "3957f4aa-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1307",
+            "creationTimestamp": "2019-04-10T17:44:00Z",
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c10,c0",
+              "openshift.io/sa.scc.supplemental-groups": "1000090000/10000",
+              "openshift.io/sa.scc.uid-range": "1000090000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "kube-system",
+            "selfLink": "/apis/project.openshift.io/v1/projects/kube-system",
+            "uid": "3955c2fc-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1288",
+            "creationTimestamp": "2019-04-10T17:44:00Z",
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c8,c2",
+              "openshift.io/sa.scc.supplemental-groups": "1000060000/10000",
+              "openshift.io/sa.scc.uid-range": "1000060000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "myproject",
+            "selfLink": "/apis/project.openshift.io/v1/projects/myproject",
+            "uid": "ad64b0b8-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "2163",
+            "creationTimestamp": "2019-04-10T17:47:15Z",
+            "annotations": {
+              "openshift.io/description": "Initial developer project",
+              "openshift.io/display-name": "My Project",
+              "openshift.io/requester": "developer",
+              "openshift.io/sa.scc.mcs": "s0:c12,c4",
+              "openshift.io/sa.scc.supplemental-groups": "1000140000/10000",
+              "openshift.io/sa.scc.uid-range": "1000140000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift",
+            "uid": "831e64a2-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1263",
+            "creationTimestamp": "2019-04-10T17:46:04Z",
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c6,c0",
+              "openshift.io/sa.scc.supplemental-groups": "1000030000/10000",
+              "openshift.io/sa.scc.uid-range": "1000030000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift-apiserver",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift-apiserver",
+            "uid": "3c5abe74-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1317",
+            "creationTimestamp": "2019-04-10T17:44:05Z",
+            "labels": {
+              "openshift.io/run-level": "1"
+            },
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"creationTimestamp\":null,\"labels\":{\"openshift.io/run-level\":\"1\"},\"name\":\"openshift-apiserver\",\"namespace\":\"\"},\"spec\":{},\"status\":{}}\n",
+              "openshift.io/sa.scc.mcs": "s0:c11,c0",
+              "openshift.io/sa.scc.supplemental-groups": "1000110000/10000",
+              "openshift.io/sa.scc.uid-range": "1000110000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift-controller-manager",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift-controller-manager",
+            "uid": "9446cd1c-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1304",
+            "creationTimestamp": "2019-04-10T17:46:33Z",
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"creationTimestamp\":null,\"name\":\"openshift-controller-manager\",\"namespace\":\"\"},\"spec\":{},\"status\":{}}\n",
+              "openshift.io/sa.scc.mcs": "s0:c9,c4",
+              "openshift.io/sa.scc.supplemental-groups": "1000080000/10000",
+              "openshift.io/sa.scc.uid-range": "1000080000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift-core-operators",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift-core-operators",
+            "uid": "3c27b127-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "85251",
+            "creationTimestamp": "2019-04-10T17:44:05Z",
+            "labels": {
+              "openshift.io/run-level": "1"
+            },
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"creationTimestamp\":null,\"labels\":{\"openshift.io/run-level\":\"1\"},\"name\":\"openshift-core-operators\",\"namespace\":\"\"},\"spec\":{},\"status\":{}}\n",
+              "openshift.io/sa.scc.mcs": "s0:c10,c5",
+              "openshift.io/sa.scc.supplemental-groups": "1000100000/10000",
+              "openshift.io/sa.scc.uid-range": "1000100000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift-infra",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift-infra",
+            "uid": "3bc0aac0-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1191",
+            "creationTimestamp": "2019-04-10T17:44:04Z",
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c1,c0",
+              "openshift.io/sa.scc.supplemental-groups": "1000000000/10000",
+              "openshift.io/sa.scc.uid-range": "1000000000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift-node",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift-node",
+            "uid": "83201d6a-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1270",
+            "creationTimestamp": "2019-04-10T17:46:04Z",
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c6,c5",
+              "openshift.io/sa.scc.supplemental-groups": "1000040000/10000",
+              "openshift.io/sa.scc.uid-range": "1000040000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift-service-cert-signer",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift-service-cert-signer",
+            "uid": "3b5d01a0-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1293",
+            "creationTimestamp": "2019-04-10T17:44:03Z",
+            "labels": {
+              "openshift.io/run-level": "1"
+            },
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c8,c7",
+              "openshift.io/sa.scc.supplemental-groups": "1000070000/10000",
+              "openshift.io/sa.scc.uid-range": "1000070000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        },
+        {
+          "metadata": {
+            "name": "openshift-web-console",
+            "selfLink": "/apis/project.openshift.io/v1/projects/openshift-web-console",
+            "uid": "9eec6934-5bb8-11e9-8c30-4e620801d617",
+            "resourceVersion": "1380",
+            "creationTimestamp": "2019-04-10T17:46:50Z",
+            "annotations": {
+              "openshift.io/sa.scc.mcs": "s0:c11,c5",
+              "openshift.io/sa.scc.supplemental-groups": "1000120000/10000",
+              "openshift.io/sa.scc.uid-range": "1000120000/10000"
+            }
+          },
+          "spec": {
+            "finalizers": ["kubernetes"]
+          },
+          "status": {
+            "phase": "Active"
+          }
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Cache-Control",
+      "no-store",
+      "Cache-Control",
+      "no-store",
+      "Content-Type",
+      "application/json",
+      "Date",
+      "Mon, 15 Apr 2019 16:53:22 GMT",
+      "Connection",
+      "close",
+      "Transfer-Encoding",
+      "chunked"
+    ]
+  }
+]

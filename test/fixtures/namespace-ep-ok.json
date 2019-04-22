@@ -1,0 +1,107 @@
+[
+  {
+    "scope": "https://api.starter-us-west-2.openshift.com:443",
+    "method": "GET",
+    "path": "/api/v1/namespaces/example_namespace/endpoints",
+    "body": "",
+    "status": 200,
+    "response": {
+      "kind": "EndpointsList",
+      "apiVersion": "v1",
+      "metadata": {
+        "selfLink": "/api/v1/namespaces/example_namespace/endpoints",
+        "resourceVersion": "3549545146"
+      },
+      "items": [
+        {
+          "metadata": {
+            "name": "jenkins",
+            "namespace": "example_namespace",
+            "selfLink": "/api/v1/namespaces/example_namespace/endpoints/jenkins",
+            "uid": "c3f08889-61bf-11e9-b220-0a2a2b777307",
+            "resourceVersion": "3548837658",
+            "creationTimestamp": "2019-04-18T09:53:06Z",
+            "labels": {
+              "app": "jenkins-persistent",
+              "template": "jenkins-persistent-template"
+            }
+          },
+          "subsets": [
+            {
+              "addresses": [
+                {
+                  "ip": "10.131.29.54",
+                  "nodeName": "ip-172-31-56-129.us-west-2.compute.internal",
+                  "targetRef": {
+                    "kind": "Pod",
+                    "namespace": "example_namespace",
+                    "name": "jenkins-1-vqgxg",
+                    "uid": "c764e7d4-61bf-11e9-b220-0a2a2b777307",
+                    "resourceVersion": "3548837654"
+                  }
+                }
+              ],
+              "ports": [
+                {
+                  "name": "web",
+                  "port": 8080,
+                  "protocol": "TCP"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metadata": {
+            "name": "jenkins-jnlp",
+            "namespace": "example_namespace",
+            "selfLink": "/api/v1/namespaces/example_namespace/endpoints/jenkins-jnlp",
+            "uid": "c3ecac7d-61bf-11e9-b220-0a2a2b777307",
+            "resourceVersion": "3548837657",
+            "creationTimestamp": "2019-04-18T09:53:06Z",
+            "labels": {
+              "app": "jenkins-persistent",
+              "template": "jenkins-persistent-template"
+            }
+          },
+          "subsets": [
+            {
+              "addresses": [
+                {
+                  "ip": "10.131.29.54",
+                  "nodeName": "ip-172-31-56-129.us-west-2.compute.internal",
+                  "targetRef": {
+                    "kind": "Pod",
+                    "namespace": "example_namespace",
+                    "name": "jenkins-1-vqgxg",
+                    "uid": "c764e7d4-61bf-11e9-b220-0a2a2b777307",
+                    "resourceVersion": "3548837654"
+                  }
+                }
+              ],
+              "ports": [
+                {
+                  "name": "agent",
+                  "port": 50000,
+                  "protocol": "TCP"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Cache-Control",
+      "no-store",
+      "Content-Type",
+      "application/json",
+      "Date",
+      "Thu, 18 Apr 2019 18:08:21 GMT",
+      "Content-Length",
+      "1500",
+      "Connection",
+      "close"
+    ]
+  }
+]

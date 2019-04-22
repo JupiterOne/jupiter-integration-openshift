@@ -1,0 +1,736 @@
+{
+  "pods": [
+    {
+      "metadata": {
+        "name": "jenkins-1-vqgxg",
+        "generateName": "jenkins-1-",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/pods/jenkins-1-vqgxg",
+        "uid": "c764e7d4-61bf-11e9-b220-0a2a2b777307",
+        "resourceVersion": "3548837654",
+        "creationTimestamp": "2019-04-18T09:53:12Z",
+        "labels": {
+          "deployment": "jenkins-1",
+          "deploymentconfig": "jenkins",
+          "name": "jenkins"
+        },
+        "annotations": {
+          "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container jenkins; cpu limit for container jenkins",
+          "openshift.io/deployment-config.latest-version": "1",
+          "openshift.io/deployment-config.name": "jenkins",
+          "openshift.io/deployment.name": "jenkins-1",
+          "openshift.io/scc": "restricted"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "name": "jenkins-1",
+            "uid": "c46d03c5-61bf-11e9-b220-0a2a2b777307",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "jenkins-data",
+            "persistentVolumeClaim": {
+              "claimName": "jenkins"
+            }
+          },
+          {
+            "name": "jenkins-token-w64vt",
+            "secret": {
+              "secretName": "jenkins-token-w64vt",
+              "defaultMode": 420
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "jenkins",
+            "image": "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
+            "env": [
+              {
+                "name": "OPENSHIFT_ENABLE_OAUTH",
+                "value": "true"
+              },
+              {
+                "name": "OPENSHIFT_ENABLE_REDIRECT_PROMPT",
+                "value": "true"
+              },
+              {
+                "name": "DISABLE_ADMINISTRATIVE_MONITORS",
+                "value": "true"
+              },
+              {
+                "name": "KUBERNETES_MASTER",
+                "value": "https://kubernetes.default:443"
+              },
+              {
+                "name": "KUBERNETES_TRUST_CERTIFICATES",
+                "value": "true"
+              },
+              {
+                "name": "JENKINS_SERVICE_NAME",
+                "value": "jenkins"
+              },
+              {
+                "name": "JNLP_SERVICE_NAME",
+                "value": "jenkins-jnlp"
+              },
+              {
+                "name": "ENABLE_FATAL_ERROR_LOG_FILE",
+                "value": "false"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi"
+              },
+              "requests": {
+                "cpu": "20m",
+                "memory": "256Mi"
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "jenkins-data",
+                "mountPath": "/var/lib/jenkins"
+              },
+              {
+                "name": "jenkins-token-w64vt",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/login",
+                "port": 8080,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 420,
+              "timeoutSeconds": 240,
+              "periodSeconds": 360,
+              "successThreshold": 1,
+              "failureThreshold": 2
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/login",
+                "port": 8080,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 3,
+              "timeoutSeconds": 240,
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "failureThreshold": 3
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always",
+            "securityContext": {
+              "capabilities": {
+                "drop": ["KILL", "MKNOD", "NET_RAW", "SETGID", "SETUID"]
+              },
+              "privileged": false,
+              "runAsUser": 1034810000
+            }
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "nodeSelector": {
+          "type": "compute"
+        },
+        "serviceAccountName": "jenkins",
+        "serviceAccount": "jenkins",
+        "nodeName": "ip-172-31-56-129.us-west-2.compute.internal",
+        "securityContext": {
+          "seLinuxOptions": {
+            "level": "s0:c187,c14"
+          },
+          "fsGroup": 1034810000
+        },
+        "imagePullSecrets": [
+          {
+            "name": "jenkins-dockercfg-vbsxs"
+          }
+        ],
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/memory-pressure",
+            "operator": "Exists",
+            "effect": "NoSchedule"
+          }
+        ],
+        "priority": 0
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Initialized",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2019-04-18T09:53:12Z"
+          },
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2019-04-18T09:56:03Z"
+          },
+          {
+            "type": "ContainersReady",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": null
+          },
+          {
+            "type": "PodScheduled",
+            "status": "True",
+            "lastProbeTime": null,
+            "lastTransitionTime": "2019-04-18T09:53:12Z"
+          }
+        ],
+        "hostIP": "172.31.56.129",
+        "podIP": "10.131.29.54",
+        "startTime": "2019-04-18T09:53:12Z",
+        "containerStatuses": [
+          {
+            "name": "jenkins",
+            "state": {
+              "running": {
+                "startedAt": "2019-04-18T09:53:27Z"
+              }
+            },
+            "lastState": {},
+            "ready": true,
+            "restartCount": 0,
+            "image": "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
+            "imageID": "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
+            "containerID": "cri-o://333c9b58ccca7b6eb89a0985e547a6238186c3dcbc321b77f0b9217fcc8ce7e1"
+          }
+        ],
+        "qosClass": "Burstable"
+      }
+    },
+    {
+      "metadata": {
+        "name": "broken-vqgxg",
+        "generateName": "broken-",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/pods/broken-vqgxg",
+        "uid": "c764e7d4-61bf-11e9-b220-0a2a2b777307",
+        "resourceVersion": "3548837654",
+        "creationTimestamp": "2019-04-18T09:53:12Z",
+        "labels": {},
+        "annotations": {},
+        "ownerReferences": []
+      },
+      "spec": {
+        "volumes": [],
+        "containers": [],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "nodeSelector": {},
+        "serviceAccountName": "brokenpod",
+        "serviceAccount": "brokenpod",
+        "nodeName": "ip-172-31-56-129.us-west-2.compute.internal",
+        "securityContext": {},
+        "imagePullSecrets": [],
+        "schedulerName": "default-scheduler",
+        "tolerations": [],
+        "priority": 0
+      },
+      "status": {
+        "phase": "Stopped",
+        "conditions": [],
+        "hostIP": "172.31.56.129",
+        "podIP": "10.131.29.54",
+        "startTime": "2019-04-18T09:53:12Z",
+        "containerStatuses": [],
+        "qosClass": "Burstable"
+      }
+    },
+    {
+      "metadata": {
+        "name": "jenkins-2-vsadxg",
+        "generateName": "jenkins-2-",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/pods/jenkins-2-vqgxg",
+        "uid": "c3ee12dc-61bf-11e9-ad62-000000000000",
+        "resourceVersion": "3548837654",
+        "creationTimestamp": "2019-04-18T09:53:12Z",
+        "labels": {
+          "deployment": "jenkins-2",
+          "deploymentconfig": "jenkins",
+          "name": "jenkins"
+        },
+        "annotations": {
+          "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container jenkins; cpu limit for container jenkins",
+          "openshift.io/deployment-config.latest-version": "1",
+          "openshift.io/deployment-config.name": "jenkins",
+          "openshift.io/deployment.name": "jenkins-2",
+          "openshift.io/scc": "restricted"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "name": "jenkins-2",
+            "uid": "c46d03c5-61bf-11e9-b220-0a2a2b777307",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [],
+        "containers": [],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "nodeSelector": {
+          "type": "compute"
+        },
+        "serviceAccountName": "jenkins",
+        "serviceAccount": "jenkins",
+        "nodeName": "ip-172-31-56-129.us-west-2.compute.internal",
+        "securityContext": {
+          "seLinuxOptions": {
+            "level": "s0:c187,c14"
+          },
+          "fsGroup": 1034810000
+        },
+        "imagePullSecrets": [
+          {
+            "name": "jenkins-dockercfg-vbsxs"
+          }
+        ],
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/memory-pressure",
+            "operator": "Exists",
+            "effect": "NoSchedule"
+          }
+        ],
+        "priority": 0
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [],
+        "hostIP": "172.31.56.129",
+        "podIP": "10.131.29.54",
+        "startTime": "2019-04-18T09:53:12Z",
+        "containerStatuses": [],
+        "qosClass": "Burstable"
+      }
+    },
+    {
+      "metadata": {
+        "name": "rails-1-vqgxg",
+        "generateName": "rails-1-",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/pods/rails-1-vqgxg",
+        "uid": "c3ee12dc-61bf-11e9-ad62-000000000000",
+        "resourceVersion": "3548837654",
+        "creationTimestamp": "2019-04-18T09:53:12Z",
+        "labels": {
+          "deployment": "rails-1",
+          "deploymentconfig": "rails",
+          "name": "rails"
+        },
+        "annotations": {
+          "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container rails; cpu limit for container rails",
+          "openshift.io/deployment-config.latest-version": "1",
+          "openshift.io/deployment-config.name": "rails",
+          "openshift.io/deployment.name": "rails-1",
+          "openshift.io/scc": "restricted"
+        },
+        "ownerReferences": [
+          {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "name": "rails-1",
+            "uid": "c46d03c5-61bf-11e9-b220-0a2a2b777307",
+            "controller": true,
+            "blockOwnerDeletion": true
+          }
+        ]
+      },
+      "spec": {
+        "volumes": [],
+        "containers": [
+          {
+            "name": "rails",
+            "image": "docker-registry.default.svc:5000/openshift/rails@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
+            "env": [],
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi"
+              },
+              "requests": {
+                "cpu": "20m",
+                "memory": "256Mi"
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "rails-data",
+                "mountPath": "/var/lib/rails"
+              },
+              {
+                "name": "rails-token-w64vt",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/login",
+                "port": 8080,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 420,
+              "timeoutSeconds": 240,
+              "periodSeconds": 360,
+              "successThreshold": 1,
+              "failureThreshold": 2
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/login",
+                "port": 8080,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 3,
+              "timeoutSeconds": 240,
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "failureThreshold": 3
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always",
+            "securityContext": {
+              "capabilities": {
+                "drop": ["KILL", "MKNOD", "NET_RAW", "SETGID", "SETUID"]
+              },
+              "privileged": false,
+              "runAsUser": 1034810000
+            }
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "nodeSelector": {
+          "type": "compute"
+        },
+        "serviceAccountName": "rails",
+        "serviceAccount": "rails",
+        "nodeName": "ip-172-31-56-129.us-west-2.compute.internal",
+        "securityContext": {
+          "seLinuxOptions": {
+            "level": "s0:c187,c14"
+          },
+          "fsGroup": 1034810000
+        },
+        "imagePullSecrets": [
+          {
+            "name": "rails-dockercfg-vbsxs"
+          }
+        ],
+        "schedulerName": "default-scheduler",
+        "tolerations": [
+          {
+            "key": "node.kubernetes.io/memory-pressure",
+            "operator": "Exists",
+            "effect": "NoSchedule"
+          }
+        ],
+        "priority": 0
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [],
+        "hostIP": "172.31.56.129",
+        "podIP": "10.131.29.54",
+        "startTime": "2019-04-18T09:53:12Z",
+        "containerStatuses": [],
+        "qosClass": "Burstable"
+      }
+    }
+  ],
+  "serviceAccounts": [
+    {
+      "metadata": {
+        "name": "builder",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/serviceaccounts/builder",
+        "uid": "c077817b-61bf-11e9-b220-0a2a2b777307",
+        "resourceVersion": "3548833510",
+        "creationTimestamp": "2019-04-18T09:53:00Z"
+      },
+      "secrets": [
+        {
+          "name": "builder-token-xpqbv"
+        },
+        {
+          "name": "builder-dockercfg-5wqq7"
+        }
+      ],
+      "imagePullSecrets": [
+        {
+          "name": "builder-dockercfg-5wqq7"
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "metadata": {
+        "name": "jenkins",
+        "namespace": "example_namespace",
+        "selfLink": "/apis/route.openshift.io/v1/namespaces/example_namespace/routes/jenkins",
+        "uid": "c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
+        "resourceVersion": "3548833669",
+        "creationTimestamp": "2019-04-18T09:53:06Z",
+        "labels": {
+          "app": "jenkins-persistent",
+          "template": "jenkins-persistent-template"
+        },
+        "annotations": {
+          "haproxy.router.openshift.io/timeout": "4m",
+          "openshift.io/host.generated": "true",
+          "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
+        }
+      },
+      "spec": {
+        "host": "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
+        "to": {
+          "kind": "Service",
+          "name": "jenkins",
+          "weight": 100
+        },
+        "tls": {
+          "termination": "edge",
+          "insecureEdgeTerminationPolicy": "Redirect"
+        },
+        "wildcardPolicy": "None"
+      },
+      "status": {
+        "ingress": [
+          {
+            "host": "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
+            "routerName": "router",
+            "conditions": [
+              {
+                "type": "Admitted",
+                "status": "True",
+                "lastTransitionTime": "2019-04-18T09:53:06Z"
+              }
+            ],
+            "wildcardPolicy": "None",
+            "routerCanonicalHostname": "elb.7e14.starter-us-west-2.openshiftapps.com"
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "rails",
+        "namespace": "broken_namespace",
+        "selfLink": "/apis/route.openshift.io/v1/namespaces/broken_namespace/routes/rails",
+        "uid": "c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
+        "resourceVersion": "3548833669",
+        "creationTimestamp": "2019-04-18T09:53:06Z",
+        "labels": {
+          "app": "rails-persistent",
+          "template": "rails-persistent-template"
+        },
+        "annotations": {
+          "haproxy.router.openshift.io/timeout": "4m",
+          "openshift.io/host.generated": "true",
+          "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
+        }
+      },
+      "spec": {
+        "host": "rails-broken_namespace.7e14.starter-us-west-2.openshiftapps.com",
+        "to": {
+          "kind": "Service",
+          "name": "rails",
+          "weight": 100
+        },
+        "tls": {
+          "termination": "edge",
+          "insecureEdgeTerminationPolicy": "Redirect"
+        },
+        "wildcardPolicy": "None"
+      },
+      "status": {
+        "ingress": []
+      }
+    },
+    {
+      "metadata": {
+        "name": "non-service-route",
+        "namespace": "broken_namespace",
+        "selfLink": "/apis/route.openshift.io/v1/namespaces/broken_namespace/routes/non-service-route",
+        "uid": "c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
+        "resourceVersion": "3548833669",
+        "creationTimestamp": "2019-04-18T09:53:06Z",
+        "labels": {
+          "app": "non-service-route-persistent",
+          "template": "non-service-route-persistent-template"
+        },
+        "annotations": {
+          "haproxy.router.openshift.io/timeout": "4m",
+          "openshift.io/host.generated": "true",
+          "template.openshift.io/expose-uri": "http://{.spec.host}{.spec.path}"
+        }
+      },
+      "spec": {
+        "host": "non-service-route-broken_namespace.7e14.starter-us-west-2.openshiftapps.com",
+        "to": {
+          "kind": "Route",
+          "name": "node",
+          "weight": 100
+        },
+        "tls": {
+          "termination": "edge",
+          "insecureEdgeTerminationPolicy": "Redirect"
+        },
+        "wildcardPolicy": "None"
+      },
+      "status": {
+        "ingress": []
+      }
+    }
+  ],
+  "services": [
+    {
+      "metadata": {
+        "name": "jenkins",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/services/jenkins",
+        "uid": "c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
+        "resourceVersion": "3548833689",
+        "creationTimestamp": "2019-04-18T09:53:06Z",
+        "labels": {
+          "app": "jenkins-persistent",
+          "template": "jenkins-persistent-template"
+        },
+        "annotations": {
+          "service.alpha.openshift.io/dependencies": "[{\"name\": \"jenkins-jnlp\", \"namespace\": \"\", \"kind\": \"Service\"}]",
+          "service.openshift.io/infrastructure": "true"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "web",
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 8080
+          }
+        ],
+        "selector": {
+          "name": "jenkins"
+        },
+        "clusterIP": "172.30.122.71",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "testService",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/services/testService",
+        "uid": "c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
+        "resourceVersion": "3548833689",
+        "creationTimestamp": "2019-04-18T09:53:06Z",
+        "labels": {
+          "app": "testService-persistent",
+          "template": "testService-persistent-template"
+        },
+        "annotations": {
+          "service.alpha.openshift.io/dependencies": "[{\"name\": \"testService-jnlp\", \"namespace\": \"\", \"kind\": \"Service\"}]",
+          "service.openshift.io/infrastructure": "true"
+        }
+      },
+      "spec": {
+        "ports": [],
+        "selector": {},
+        "clusterIP": "172.30.122.71",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "serviceWithoutPods",
+        "namespace": "example_namespace",
+        "selfLink": "/api/v1/namespaces/example_namespace/services/serviceWithoutPods",
+        "uid": "c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
+        "resourceVersion": "3548833689",
+        "creationTimestamp": "2019-04-18T09:53:06Z",
+        "labels": {
+          "app": "serviceWithoutPods-persistent",
+          "template": "serviceWithoutPods-persistent-template"
+        },
+        "annotations": {
+          "service.alpha.openshift.io/dependencies": "[{\"name\": \"serviceWithoutPods-jnlp\", \"namespace\": \"\", \"kind\": \"Service\"}]",
+          "service.openshift.io/infrastructure": "true"
+        }
+      },
+      "spec": {
+        "ports": [],
+        "selector": {
+          "name": "missinPod"
+        },
+        "clusterIP": "172.30.122.71",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    }
+  ],
+  "project": {
+    "metadata": {
+      "name": "default",
+      "selfLink": "/apis/project.openshift.io/v1/projects/default",
+      "uid": "39537998-5bb8-11e9-8c30-4e620801d617",
+      "resourceVersion": "1284",
+      "creationTimestamp": "2019-04-10T17:44:00Z",
+      "annotations": {}
+    },
+    "spec": {
+      "finalizers": ["kubernetes"]
+    },
+    "status": {
+      "phase": "Active"
+    }
+  }
+}

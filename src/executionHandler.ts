@@ -1,93 +1,44 @@
 import {
+  IntegrationActionName,
   IntegrationExecutionContext,
   IntegrationExecutionResult,
   IntegrationInvocationEvent,
 } from "@jupiterone/jupiter-managed-integration-sdk";
-import {
-  createAccountEntity,
-  createAccountRelationships,
-  createGroupEntities,
-  createProjectEntities,
-} from "./converters";
+
 import initializeContext from "./initializeContext";
-import OpenShiftClient from "./OpenShiftClient";
-import {
-  ACCOUNT_ENTITY_TYPE,
-  ACCOUNT_GROUP_RELATIONSHIP_TYPE,
-  ACCOUNT_PROJECT_RELATIONSHIP_TYPE,
-  AccountEntity,
-  GROUP_ENTITY_TYPE,
-  GroupEntity,
-  PROJECT_ENTITY_TYPE,
-  ProjectEntity,
-} from "./types";
+import fetchEntitiesAndRelationships from "./jupiterone/fetchEntitiesAndRelationships";
+import fetchOpenshiftData from "./openshift/fetchOpenshiftData";
+import publishChanges from "./persister/publishChanges";
+import { OpenShiftExecutionContext } from "./types";
 
 export default async function executionHandler(
   context: IntegrationExecutionContext<IntegrationInvocationEvent>,
 ): Promise<IntegrationExecutionResult> {
-  const { instance, graph, persister, openshift } = await initializeContext(
-    context,
-  );
+  const actionFunction = ACTIONS[context.event.action.name];
+  if (actionFunction) {
+    return await actionFunction(await initializeContext(context));
+  } else {
+    return {};
+  }
+}
 
-  const [
-    oldAccountEntities,
-    oldProjectEntities,
-    oldGroupEntities,
-    oldAccountRelationships,
-    newProjectEntities,
-    newGroupEntities,
-  ] = await Promise.all([
-    graph.findEntitiesByType<AccountEntity>(ACCOUNT_ENTITY_TYPE),
-    graph.findEntitiesByType<ProjectEntity>(PROJECT_ENTITY_TYPE),
-    graph.findEntitiesByType<GroupEntity>(GROUP_ENTITY_TYPE),
-    graph.findRelationshipsByType([
-      ACCOUNT_PROJECT_RELATIONSHIP_TYPE,
-      ACCOUNT_GROUP_RELATIONSHIP_TYPE,
-    ]),
-    fetchProjectEntitiesFromProvider(openshift),
-    fetchGroupEntitiesFromProvider(openshift),
-  ]);
+async function synchronize(context: OpenShiftExecutionContext): Promise<IntegrationExecutionResult> {
+  const { instance, graph, persister, openshift } = context;
 
-  const accountEntity = createAccountEntity(instance, instance.config.cluster);
-
-  const newAccountRelationships = [
-    ...createAccountRelationships(
-      accountEntity,
-      newProjectEntities,
-      ACCOUNT_PROJECT_RELATIONSHIP_TYPE,
-    ),
-    ...createAccountRelationships(
-      accountEntity,
-      newGroupEntities,
-      ACCOUNT_GROUP_RELATIONSHIP_TYPE,
-    ),
-  ];
+  const oldData = await fetchEntitiesAndRelationships(graph);
+  const openshiftData = await fetchOpenshiftData(openshift);
 
   return {
-    operations: await persister.publishPersisterOperations([
-      [
-        ...persister.processEntities(oldAccountEntities, [accountEntity]),
-        ...persister.processEntities(oldProjectEntities, newProjectEntities),
-        ...persister.processEntities(oldGroupEntities, newGroupEntities),
-      ],
-      [
-        ...persister.processRelationships(
-          oldAccountRelationships,
-          newAccountRelationships,
-        ),
-      ],
-    ]),
+    operations: await publishChanges(persister, oldData, openshiftData, instance),
   };
 }
 
-async function fetchProjectEntitiesFromProvider(
-  openshift: OpenShiftClient,
-): Promise<ProjectEntity[]> {
-  return createProjectEntities(await openshift.fetchProjects());
+type ActionFunction = (context: OpenShiftExecutionContext) => Promise<IntegrationExecutionResult>;
+
+interface ActionMap {
+  [actionName: string]: ActionFunction | undefined;
 }
 
-async function fetchGroupEntitiesFromProvider(
-  openshift: OpenShiftClient,
-): Promise<GroupEntity[]> {
-  return createGroupEntities(await openshift.fetchGroups());
-}
+const ACTIONS: ActionMap = {
+  [IntegrationActionName.INGEST]: synchronize,
+};

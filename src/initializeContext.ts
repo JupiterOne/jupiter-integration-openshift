@@ -1,9 +1,5 @@
-import {
-  IntegrationExecutionContext,
-  IntegrationInvocationEvent,
-} from "@jupiterone/jupiter-managed-integration-sdk";
-import openshiftRestClient from "openshift-rest-client";
-import OpenShiftClient from "./OpenShiftClient";
+import { IntegrationExecutionContext, IntegrationInvocationEvent } from "@jupiterone/jupiter-managed-integration-sdk";
+import OpenShiftClient from "./openshift/OpenShiftClient";
 import { OpenShiftExecutionContext } from "./types";
 
 export default async function initializeContext(
@@ -13,22 +9,12 @@ export default async function initializeContext(
     instance: { config },
   } = context;
 
-  const openshiftClient = await openshiftRestClient({
-    config: {
-      apiVersion: "v1",
-      context: {
-        cluster: config.cluster,
-        namespace: config.namespace,
-        user: config.user,
-      },
-      user: { token: config.apiToken },
-      cluster: `https://${config.cluster}`,
-    },
-  });
+  const openshift = new OpenShiftClient();
+  await openshift.authenticate(config.apiToken, config.cluster, config.insecureSkipTlsVerify === true);
 
   return {
     ...context,
     ...context.clients.getClients(),
-    openshift: new OpenShiftClient(openshiftClient),
+    openshift,
   };
 }
