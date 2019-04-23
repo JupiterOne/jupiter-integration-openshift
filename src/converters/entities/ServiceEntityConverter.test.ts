@@ -15,7 +15,8 @@ test("convert services", async () => {
           template: "jenkins-persistent-template",
         },
         annotations: {
-          "service.alpha.openshift.io/dependencies": '[{"name": "jenkins-jnlp", "namespace": "", "kind": "Service"}]',
+          "service.alpha.openshift.io/dependencies":
+            '[{"name": "jenkins-jnlp", "namespace": "", "kind": "Service"}]',
           "service.openshift.io/infrastructure": "true",
         },
       },
@@ -58,7 +59,9 @@ test("convert services", async () => {
     },
   };
 
-  const entities = createServiceEntities([{ routes: [], serviceAccounts: [], services, pods: [], project }]);
+  const entities = createServiceEntities([
+    { routes: [], serviceAccounts: [], services, pods: [], project },
+  ]);
 
   expect(entities).toEqual([
     {

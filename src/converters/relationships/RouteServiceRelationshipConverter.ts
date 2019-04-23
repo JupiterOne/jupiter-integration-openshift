@@ -8,9 +8,14 @@ import {
   SERVICE_ENTITY_TYPE,
 } from "../../jupiterone";
 
-import { generateEntityKey, generateRelationshipKey } from "../../utils/generateKeys";
+import {
+  generateEntityKey,
+  generateRelationshipKey,
+} from "../../utils/generateKeys";
 
-export function createRouteServiceRelationships(namespaces: NamespaceData[]): RouteServiceRelationship[] {
+export function createRouteServiceRelationships(
+  namespaces: NamespaceData[],
+): RouteServiceRelationship[] {
   const defaultRelationships: RouteServiceRelationship[] = [];
 
   return namespaces.reduce((relationships, namespace) => {
@@ -18,7 +23,9 @@ export function createRouteServiceRelationships(namespaces: NamespaceData[]): Ro
   }, defaultRelationships);
 }
 
-function createNsRouteServiceRelationships(namespace: NamespaceData): RouteServiceRelationship[] {
+function createNsRouteServiceRelationships(
+  namespace: NamespaceData,
+): RouteServiceRelationship[] {
   const defaultRelationships: RouteServiceRelationship[] = [];
 
   return namespace.routes.reduce((relationships, route) => {
@@ -26,7 +33,9 @@ function createNsRouteServiceRelationships(namespace: NamespaceData): RouteServi
       return relationships;
     }
 
-    const service = namespace.services.find(s => s.metadata.name === route.spec.to.name);
+    const service = namespace.services.find(
+      s => s.metadata.name === route.spec.to.name,
+    );
 
     if (!service) {
       return relationships;
@@ -36,10 +45,17 @@ function createNsRouteServiceRelationships(namespace: NamespaceData): RouteServi
   }, defaultRelationships);
 }
 
-function createRelationship(route: Route, service: Service): RouteServiceRelationship {
+function createRelationship(
+  route: Route,
+  service: Service,
+): RouteServiceRelationship {
   const parentKey = generateEntityKey(ROUTE_ENTITY_TYPE, route.metadata.uid);
   const childKey = generateEntityKey(SERVICE_ENTITY_TYPE, service.metadata.uid);
-  const relationshipKey = generateRelationshipKey(parentKey, childKey, ROUTE_SERVICE_RELATIONSHIP_CLASS);
+  const relationshipKey = generateRelationshipKey(
+    parentKey,
+    childKey,
+    ROUTE_SERVICE_RELATIONSHIP_CLASS,
+  );
 
   const relationship: RouteServiceRelationship = {
     _class: ROUTE_SERVICE_RELATIONSHIP_CLASS,

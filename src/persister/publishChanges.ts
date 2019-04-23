@@ -11,7 +11,11 @@ import * as Entities from "../jupiterone/entities";
 import * as Relationships from "../jupiterone/relationships";
 
 import { IntegrationInstance } from "@jupiterone/jupiter-managed-integration-sdk";
-import { JupiterOneDataModel, JupiterOneEntitiesData, JupiterOneRelationshipsData } from "../jupiterone";
+import {
+  JupiterOneDataModel,
+  JupiterOneEntitiesData,
+  JupiterOneRelationshipsData,
+} from "../jupiterone";
 
 import { OpenshiftDataModel } from "../openshift/types";
 
@@ -26,8 +30,16 @@ export default async function publishChanges(
 ) {
   const newData = convert(openshiftData, instance);
 
-  const entities = createEntitiesOperations(oldData.entities, newData.entities, persister);
-  const relationships = createRelationshipsOperations(oldData.relationships, newData.relationships, persister);
+  const entities = createEntitiesOperations(
+    oldData.entities,
+    newData.entities,
+    persister,
+  );
+  const relationships = createRelationshipsOperations(
+    oldData.relationships,
+    newData.relationships,
+    persister,
+  );
 
   return await persister.publishPersisterOperations([entities, relationships]);
 }
@@ -44,7 +56,13 @@ function createEntitiesOperations(
     const oldEntities = oldData[entityName];
     const newEntities = newData[entityName];
 
-    return [...operations, ...persister.processEntities<EntityFromIntegration>(oldEntities, newEntities)];
+    return [
+      ...operations,
+      ...persister.processEntities<EntityFromIntegration>(
+        oldEntities,
+        newEntities,
+      ),
+    ];
   }, defatultOperations);
 }
 
@@ -54,17 +72,25 @@ function createRelationshipsOperations(
   persister: PersisterClient,
 ): RelationshipOperation[] {
   const defatultOperations: RelationshipOperation[] = [];
-  const relationships: RelationshipsKeys[] = Object.keys(oldData) as RelationshipsKeys[];
+  const relationships: RelationshipsKeys[] = Object.keys(
+    oldData,
+  ) as RelationshipsKeys[];
 
   return relationships.reduce((operations, relationshipName) => {
     const oldRelationhips = oldData[relationshipName];
     const newRelationhips = newData[relationshipName];
 
-    return [...operations, ...persister.processRelationships(oldRelationhips, newRelationhips)];
+    return [
+      ...operations,
+      ...persister.processRelationships(oldRelationhips, newRelationhips),
+    ];
   }, defatultOperations);
 }
 
-export function convert(openshiftDataModel: OpenshiftDataModel, instance: IntegrationInstance): JupiterOneDataModel {
+export function convert(
+  openshiftDataModel: OpenshiftDataModel,
+  instance: IntegrationInstance,
+): JupiterOneDataModel {
   const entities = convertEntities(openshiftDataModel, instance);
   const relationships = convertRelationships(openshiftDataModel, entities);
 
@@ -74,16 +100,27 @@ export function convert(openshiftDataModel: OpenshiftDataModel, instance: Integr
   };
 }
 
-export function convertEntities(openshiftDataModel: OpenshiftDataModel, instance: IntegrationInstance): JupiterOneEntitiesData {
+export function convertEntities(
+  openshiftDataModel: OpenshiftDataModel,
+  instance: IntegrationInstance,
+): JupiterOneEntitiesData {
   return {
     accounts: [EntityConverters.createAccountEntity(instance)],
     groups: EntityConverters.createGroupEntities(openshiftDataModel.groups),
-    projects: EntityConverters.createProjectEntities(openshiftDataModel.projects),
+    projects: EntityConverters.createProjectEntities(
+      openshiftDataModel.projects,
+    ),
     pods: EntityConverters.createPodEntities(openshiftDataModel.namespaces),
-    containers: EntityConverters.createContainerEntities(openshiftDataModel.namespaces),
+    containers: EntityConverters.createContainerEntities(
+      openshiftDataModel.namespaces,
+    ),
     routes: EntityConverters.createRouteEntities(openshiftDataModel.namespaces),
-    services: EntityConverters.createServiceEntities(openshiftDataModel.namespaces),
-    serviceAccounts: EntityConverters.createServiceAccountEntities(openshiftDataModel.namespaces),
+    services: EntityConverters.createServiceEntities(
+      openshiftDataModel.namespaces,
+    ),
+    serviceAccounts: EntityConverters.createServiceAccountEntities(
+      openshiftDataModel.namespaces,
+    ),
     users: EntityConverters.createUserEntities(openshiftDataModel.users),
   };
 }
@@ -119,14 +156,29 @@ export function convertRelationships(
   );
 
   return {
-    accountGroupRelationships: RelationshipConverters.createAccountGroupRelationships(openshiftDataModel.groups, account),
-    accountProjectRelationships: RelationshipConverters.createAccountProjectRelationships(openshiftDataModel.projects, account),
-    userGroupRelationships: RelationshipConverters.createUserGroupRelationships(openshiftDataModel.groups, openshiftDataModel.users),
+    accountGroupRelationships: RelationshipConverters.createAccountGroupRelationships(
+      openshiftDataModel.groups,
+      account,
+    ),
+    accountProjectRelationships: RelationshipConverters.createAccountProjectRelationships(
+      openshiftDataModel.projects,
+      account,
+    ),
+    userGroupRelationships: RelationshipConverters.createUserGroupRelationships(
+      openshiftDataModel.groups,
+      openshiftDataModel.users,
+    ),
     projectRouteRelationships,
     projectServiceAccountRelationships,
     projectServiceRelationships,
-    routeServiceRelationships: RelationshipConverters.createRouteServiceRelationships(openshiftDataModel.namespaces),
-    podContainerRelationships: RelationshipConverters.createPodContainerRelationships(openshiftDataModel.namespaces),
-    servicePodRelationships: RelationshipConverters.createServicePodRelationships(openshiftDataModel.namespaces),
+    routeServiceRelationships: RelationshipConverters.createRouteServiceRelationships(
+      openshiftDataModel.namespaces,
+    ),
+    podContainerRelationships: RelationshipConverters.createPodContainerRelationships(
+      openshiftDataModel.namespaces,
+    ),
+    servicePodRelationships: RelationshipConverters.createServicePodRelationships(
+      openshiftDataModel.namespaces,
+    ),
   };
 }

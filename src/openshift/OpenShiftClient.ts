@@ -1,12 +1,24 @@
 // tslint:disable:no-var-requires
 const openshiftRestClient = require("openshift-rest-client").OpenshiftClient;
 
-import { Group, Pod, Project, Route, Service, ServiceAccount, User } from "./types";
+import {
+  Group,
+  Pod,
+  Project,
+  Route,
+  Service,
+  ServiceAccount,
+  User,
+} from "./types";
 
 export default class OpenShiftClient {
   private restClient: any;
 
-  public async authenticate(apiToken: string, cluster: string, insecureSkipTlsVerify: boolean) {
+  public async authenticate(
+    apiToken: string,
+    cluster: string,
+    insecureSkipTlsVerify: boolean,
+  ) {
     const config = {
       auth: { bearer: apiToken },
       url: `https://${cluster}`,
@@ -56,10 +68,14 @@ export default class OpenShiftClient {
     }
   }
 
-  public async fetchNamespaceServiceAccounts(namespace: string): Promise<ServiceAccount[]> {
+  public async fetchNamespaceServiceAccounts(
+    namespace: string,
+  ): Promise<ServiceAccount[]> {
     const {
       body: { items: serviceAccounts },
-    } = await this.restClient.api.v1.namespaces(namespace).serviceaccounts.get();
+    } = await this.restClient.api.v1
+      .namespaces(namespace)
+      .serviceaccounts.get();
 
     return serviceAccounts;
   }
@@ -67,7 +83,9 @@ export default class OpenShiftClient {
   public async fetchNamespaceRoutes(namespace: string): Promise<Route[]> {
     const {
       body: { items: routes },
-    } = await this.restClient.apis["route.openshift.io"].v1.namespaces(namespace).routes.get();
+    } = await this.restClient.apis["route.openshift.io"].v1
+      .namespaces(namespace)
+      .routes.get();
 
     return routes;
   }

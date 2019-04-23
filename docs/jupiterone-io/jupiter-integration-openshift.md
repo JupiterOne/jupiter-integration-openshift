@@ -2,12 +2,13 @@
 
 ## Overview
 
-JupiterOne provides a managed integration with Openshift. The integration connects directly to Openshift APIs to obtain cluster metadata and
-analyze resource relationships.
+JupiterOne provides a managed integration with Openshift. The integration
+connects directly to Openshift APIs to obtain cluster metadata and analyze
+resource relationships.
 
 ## Integration Instance Configuration
 
-To perform a sync, you should use a specific Service Account. To create that in follow this instruction.
+Authentication is currently designed to use a Service Account.
 
 Login as admin:
 
@@ -28,7 +29,8 @@ Get service account token:
 oc serviceaccounts get-token jupiterone
 ```
 
-The integration instance configuration requires cluster address and an service account token.
+The integration instance configuration requires the cluster address and service
+account token.
 
 ## Entities
 

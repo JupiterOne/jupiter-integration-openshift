@@ -37,7 +37,8 @@ test("convert account -> project relationships", async () => {
     {
       _class: "HAS",
       _fromEntityKey: "openshift_account_id",
-      _key: "openshift_account_id_has_openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
+      _key:
+        "openshift_account_id_has_openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
       _toEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
       _type: "openshift_account_has_project",
     },

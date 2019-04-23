@@ -96,7 +96,11 @@ interface Probe {
 }
 
 interface SecurityContext {
-  [key: string]: { [key: string]: string | number | string[] | boolean } | number | string | boolean;
+  [key: string]:
+    | { [key: string]: string | number | string[] | boolean }
+    | number
+    | string
+    | boolean;
 }
 
 export interface Container {

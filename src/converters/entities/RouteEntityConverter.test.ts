@@ -6,7 +6,8 @@ test("convert routes", async () => {
       metadata: {
         name: "jenkins",
         namespace: "example_namespace",
-        selfLink: "/apis/route.openshift.io/v1/namespaces/example_namespace/routes/jenkins",
+        selfLink:
+          "/apis/route.openshift.io/v1/namespaces/example_namespace/routes/jenkins",
         uid: "c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
         resourceVersion: "3548833669",
         creationTimestamp: "2019-04-18T09:53:06Z",
@@ -21,7 +22,8 @@ test("convert routes", async () => {
         },
       },
       spec: {
-        host: "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
+        host:
+          "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
         to: {
           kind: "Service",
           name: "jenkins",
@@ -36,7 +38,8 @@ test("convert routes", async () => {
       status: {
         ingress: [
           {
-            host: "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
+            host:
+              "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
             routerName: "router",
             conditions: [
               {
@@ -46,7 +49,8 @@ test("convert routes", async () => {
               },
             ],
             wildcardPolicy: "None",
-            routerCanonicalHostname: "elb.7e14.starter-us-west-2.openshiftapps.com",
+            routerCanonicalHostname:
+              "elb.7e14.starter-us-west-2.openshiftapps.com",
           },
         ],
       },
@@ -70,7 +74,9 @@ test("convert routes", async () => {
     },
   };
 
-  const entities = createRouteEntities([{ routes, serviceAccounts: [], services: [], pods: [], project }]);
+  const entities = createRouteEntities([
+    { routes, serviceAccounts: [], services: [], pods: [], project },
+  ]);
 
   expect(entities).toEqual([
     {
@@ -79,7 +85,8 @@ test("convert routes", async () => {
       _type: "openshift_route",
       creationTimestamp: "2019-04-18T09:53:06Z",
       displayName: "jenkins",
-      host: "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
+      host:
+        "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",
       name: "jenkins",
       namespace: "example_namespace",
       resourceVersion: "3548833669",

@@ -7,4 +7,9 @@ import fetchEntitiesAndRelationships, {
   JupiterOneRelationshipsData,
 } from "./fetchEntitiesAndRelationships";
 
-export { fetchEntitiesAndRelationships, JupiterOneDataModel, JupiterOneEntitiesData, JupiterOneRelationshipsData };
+export {
+  fetchEntitiesAndRelationships,
+  JupiterOneDataModel,
+  JupiterOneEntitiesData,
+  JupiterOneRelationshipsData,
+};

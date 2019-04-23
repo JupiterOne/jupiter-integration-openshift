@@ -1,7 +1,6 @@
 import {
   IntegrationActionName,
   IntegrationExecutionContext,
-  IntegrationInvocationEvent,
   JobsClient,
   PersisterClient,
 } from "@jupiterone/jupiter-managed-integration-sdk";
@@ -31,7 +30,7 @@ const clients = {
 };
 
 let openshiftClient: OpenShiftClient;
-let executionContext: IntegrationExecutionContext<IntegrationInvocationEvent>;
+let executionContext: IntegrationExecutionContext;
 
 jest.mock("./initializeContext");
 
@@ -79,7 +78,7 @@ beforeEach(() => {
     instance: {
       config: {},
     },
-  } as unknown) as IntegrationExecutionContext<IntegrationInvocationEvent>;
+  } as unknown) as IntegrationExecutionContext;
 
   (initializeContext as jest.Mock).mockReturnValue(executionContext);
 });
@@ -90,7 +89,9 @@ describe("INGEST", () => {
 
     expect(openshiftClient.fetchGroups).toHaveBeenCalledTimes(1);
     expect(openshiftClient.fetchProjects).toHaveBeenCalledTimes(1);
-    expect(openshiftClient.fetchNamespaceServiceAccounts).toHaveBeenCalledTimes(1);
+    expect(openshiftClient.fetchNamespaceServiceAccounts).toHaveBeenCalledTimes(
+      1,
+    );
     expect(openshiftClient.fetchNamespaceRoutes).toHaveBeenCalledTimes(1);
     expect(openshiftClient.fetchNamespacePods).toHaveBeenCalledTimes(1);
     expect(openshiftClient.fetchNamespaceServices).toHaveBeenCalledTimes(1);

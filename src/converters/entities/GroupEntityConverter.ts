@@ -1,4 +1,8 @@
-import { GROUP_ENTITY_CLASS, GROUP_ENTITY_TYPE, GroupEntity } from "../../jupiterone";
+import {
+  GROUP_ENTITY_CLASS,
+  GROUP_ENTITY_TYPE,
+  GroupEntity,
+} from "../../jupiterone";
 
 import { Group } from "../../openshift/types";
 

@@ -1,8 +1,14 @@
-import { ROUTE_ENTITY_CLASS, ROUTE_ENTITY_TYPE, RouteEntity } from "../../jupiterone";
+import {
+  ROUTE_ENTITY_CLASS,
+  ROUTE_ENTITY_TYPE,
+  RouteEntity,
+} from "../../jupiterone";
 import { NamespaceData } from "../../openshift/types";
 import { generateEntityKey } from "../../utils/generateKeys";
 
-export function createRouteEntities(namespaces: NamespaceData[]): RouteEntity[] {
+export function createRouteEntities(
+  namespaces: NamespaceData[],
+): RouteEntity[] {
   const defaultEntities: RouteEntity[] = [];
 
   return namespaces.reduce((namespaceRouteEntities, namespace) => {

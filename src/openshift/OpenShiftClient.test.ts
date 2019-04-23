@@ -1,8 +1,10 @@
 import nock from "nock";
 import OpenShiftClient from "./OpenShiftClient";
 
-const TOKEN = process.env.OPENSHIFT_LOCAL_EXECUTION_API_TOKEN || "example_token";
-const CLUSTER = process.env.OPENSHIFT_LOCAL_EXECUTION_CLUSTER || "192.168.64.3:8443";
+const TOKEN =
+  process.env.OPENSHIFT_LOCAL_EXECUTION_API_TOKEN || "example_token";
+const CLUSTER =
+  process.env.OPENSHIFT_LOCAL_EXECUTION_CLUSTER || "192.168.64.3:8443";
 
 const EXAMPLE_NAMESPACE = process.env.EXAMPLE_NAMESPACE || "example_namespace";
 
@@ -13,7 +15,9 @@ function prepareScope(def: nock.NockDefinition) {
 describe("OpenShiftClient fetch ok data", () => {
   beforeAll(() => {
     nock.back.fixtures = `${__dirname}/../../test/fixtures/`;
-    process.env.CI ? nock.back.setMode("lockdown") : nock.back.setMode("record");
+    process.env.CI
+      ? nock.back.setMode("lockdown")
+      : nock.back.setMode("record");
   });
 
   async function getAuthenticatedClient() {
@@ -104,7 +108,9 @@ describe("OpenShiftClient fetch ok data", () => {
       before: prepareScope,
     });
     const client = await getAuthenticatedClient();
-    const response = await client.fetchNamespaceServiceAccounts(EXAMPLE_NAMESPACE);
+    const response = await client.fetchNamespaceServiceAccounts(
+      EXAMPLE_NAMESPACE,
+    );
     expect(response.length).not.toEqual(0);
     nockDone();
   });

@@ -1,4 +1,8 @@
-import { PROJECT_ENTITY_CLASS, PROJECT_ENTITY_TYPE, ProjectEntity } from "../../jupiterone";
+import {
+  PROJECT_ENTITY_CLASS,
+  PROJECT_ENTITY_TYPE,
+  ProjectEntity,
+} from "../../jupiterone";
 import { Project } from "../../openshift/types";
 
 import { generateEntityKey } from "../../utils/generateKeys";

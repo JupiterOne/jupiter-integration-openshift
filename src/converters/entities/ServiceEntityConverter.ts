@@ -1,8 +1,14 @@
-import { SERVICE_ENTITY_CLASS, SERVICE_ENTITY_TYPE, ServiceEntity } from "../../jupiterone";
+import {
+  SERVICE_ENTITY_CLASS,
+  SERVICE_ENTITY_TYPE,
+  ServiceEntity,
+} from "../../jupiterone";
 import { NamespaceData } from "../../openshift/types";
 import { generateEntityKey } from "../../utils/generateKeys";
 
-export function createServiceEntities(namespaces: NamespaceData[]): ServiceEntity[] {
+export function createServiceEntities(
+  namespaces: NamespaceData[],
+): ServiceEntity[] {
   const defaultEntities: ServiceEntity[] = [];
 
   return namespaces.reduce((namespaceSAEntities, namespace) => {

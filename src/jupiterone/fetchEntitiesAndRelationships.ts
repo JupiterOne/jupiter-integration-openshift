@@ -31,7 +31,9 @@ export interface JupiterOneDataModel {
   relationships: JupiterOneRelationshipsData;
 }
 
-export default async function fetchEntitiesAndRelationships(graph: GraphClient): Promise<JupiterOneDataModel> {
+export default async function fetchEntitiesAndRelationships(
+  graph: GraphClient,
+): Promise<JupiterOneDataModel> {
   const data: JupiterOneDataModel = {
     entities: await fetchEntities(graph),
     relationships: await fetchRelationships(graph),
@@ -40,20 +42,32 @@ export default async function fetchEntitiesAndRelationships(graph: GraphClient):
   return data;
 }
 
-async function fetchEntities(graph: GraphClient): Promise<JupiterOneEntitiesData> {
+async function fetchEntities(
+  graph: GraphClient,
+): Promise<JupiterOneEntitiesData> {
   const [accounts, groups, users, serviceAccounts] = await Promise.all([
-    graph.findEntitiesByType<Entities.AccountEntity>(Entities.ACCOUNT_ENTITY_TYPE),
+    graph.findEntitiesByType<Entities.AccountEntity>(
+      Entities.ACCOUNT_ENTITY_TYPE,
+    ),
     graph.findEntitiesByType<Entities.GroupEntity>(Entities.GROUP_ENTITY_TYPE),
     graph.findEntitiesByType<Entities.UserEntity>(Entities.USER_ENTITY_TYPE),
-    graph.findEntitiesByType<Entities.ServiceAccountEntity>(Entities.SERVICE_ACCOUNT_ENTITY_TYPE),
+    graph.findEntitiesByType<Entities.ServiceAccountEntity>(
+      Entities.SERVICE_ACCOUNT_ENTITY_TYPE,
+    ),
   ]);
 
   const [projects, pods, services, routes, containers] = await Promise.all([
-    graph.findEntitiesByType<Entities.ProjectEntity>(Entities.PROJECT_ENTITY_TYPE),
+    graph.findEntitiesByType<Entities.ProjectEntity>(
+      Entities.PROJECT_ENTITY_TYPE,
+    ),
     graph.findEntitiesByType<Entities.PodEntity>(Entities.POD_ENTITY_TYPE),
-    graph.findEntitiesByType<Entities.ServiceEntity>(Entities.SERVICE_ENTITY_TYPE),
+    graph.findEntitiesByType<Entities.ServiceEntity>(
+      Entities.SERVICE_ENTITY_TYPE,
+    ),
     graph.findEntitiesByType<Entities.RouteEntity>(Entities.ROUTE_ENTITY_TYPE),
-    graph.findEntitiesByType<Entities.ContainerEntity>(Entities.CONTAINER_ENTITY_TYPE),
+    graph.findEntitiesByType<Entities.ContainerEntity>(
+      Entities.CONTAINER_ENTITY_TYPE,
+    ),
   ]);
 
   return {
@@ -69,11 +83,23 @@ async function fetchEntities(graph: GraphClient): Promise<JupiterOneEntitiesData
   };
 }
 
-export async function fetchRelationships(graph: GraphClient): Promise<JupiterOneRelationshipsData> {
-  const [accountGroupRelationships, accountProjectRelationships, userGroupRelationships] = await Promise.all([
-    graph.findRelationshipsByType<Relationships.AccountGroupRelationship>(Relationships.ACCOUNT_GROUP_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<Relationships.AccountProjectRelationship>(Relationships.ACCOUNT_PROJECT_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<Relationships.UserGroupRelationship>(Relationships.USER_GROUP_RELATIONSHIP_TYPE),
+export async function fetchRelationships(
+  graph: GraphClient,
+): Promise<JupiterOneRelationshipsData> {
+  const [
+    accountGroupRelationships,
+    accountProjectRelationships,
+    userGroupRelationships,
+  ] = await Promise.all([
+    graph.findRelationshipsByType<Relationships.AccountGroupRelationship>(
+      Relationships.ACCOUNT_GROUP_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<Relationships.AccountProjectRelationship>(
+      Relationships.ACCOUNT_PROJECT_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<Relationships.UserGroupRelationship>(
+      Relationships.USER_GROUP_RELATIONSHIP_TYPE,
+    ),
   ]);
 
   const [
@@ -84,12 +110,24 @@ export async function fetchRelationships(graph: GraphClient): Promise<JupiterOne
     servicePodRelationships,
     podContainerRelationships,
   ] = await Promise.all([
-    graph.findRelationshipsByType<Relationships.ProjectRouteRelationship>(Relationships.PROJECT_ROUTE_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<Relationships.ProjectServiceAccountRelationship>(Relationships.PROJECT_SERVICE_ACCOUNT_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<Relationships.ProjectServiceRelationship>(Relationships.PROJECT_SERVICE_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<Relationships.RouteServiceRelationship>(Relationships.ROUTE_SERVICE_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<Relationships.ServicePodRelationship>(Relationships.SERVICE_POD_RELATIONSHIP_TYPE),
-    graph.findRelationshipsByType<Relationships.PodContainerRelationship>(Relationships.POD_CONTAINER_RELATIONSHIP_TYPE),
+    graph.findRelationshipsByType<Relationships.ProjectRouteRelationship>(
+      Relationships.PROJECT_ROUTE_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<
+      Relationships.ProjectServiceAccountRelationship
+    >(Relationships.PROJECT_SERVICE_ACCOUNT_RELATIONSHIP_TYPE),
+    graph.findRelationshipsByType<Relationships.ProjectServiceRelationship>(
+      Relationships.PROJECT_SERVICE_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<Relationships.RouteServiceRelationship>(
+      Relationships.ROUTE_SERVICE_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<Relationships.ServicePodRelationship>(
+      Relationships.SERVICE_POD_RELATIONSHIP_TYPE,
+    ),
+    graph.findRelationshipsByType<Relationships.PodContainerRelationship>(
+      Relationships.POD_CONTAINER_RELATIONSHIP_TYPE,
+    ),
   ]);
 
   return {
