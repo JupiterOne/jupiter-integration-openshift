@@ -13,7 +13,7 @@ export default async function initializeContext(
   await openshift.authenticate(
     config.apiToken,
     config.cluster,
-    config.insecureSkipTlsVerify === true,
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED === "0",
   );
 
   return {

@@ -6,7 +6,6 @@ import invocationConfig from "../src/index";
 const integrationConfig = {
   cluster: process.env.OPENSHIFT_LOCAL_EXECUTION_CLUSTER,
   apiToken: process.env.OPENSHIFT_LOCAL_EXECUTION_API_TOKEN,
-  insecureSkipTlsVerify: true,
 };
 
 executeIntegrationLocal(integrationConfig, invocationConfig, {}).catch(err => {
