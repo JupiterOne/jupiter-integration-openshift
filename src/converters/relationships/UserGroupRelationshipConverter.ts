@@ -8,13 +8,19 @@ import {
   UserGroupRelationship,
 } from "../../jupiterone";
 
-import { generateEntityKey, generateRelationshipKey } from "../../utils/generateKeys";
+import {
+  generateEntityKey,
+  generateRelationshipKey,
+} from "../../utils/generateKeys";
 
 interface UserDict {
   [uid: string]: User;
 }
 
-export function createUserGroupRelationships(groups: Group[], users: User[]): UserGroupRelationship[] {
+export function createUserGroupRelationships(
+  groups: Group[],
+  users: User[],
+): UserGroupRelationship[] {
   const usersDict: UserDict = users.reduce((dict, user) => {
     return { ...dict, [user.metadata.name]: user };
   }, {});
@@ -23,9 +29,19 @@ export function createUserGroupRelationships(groups: Group[], users: User[]): Us
     (relationships, group) => {
       const groupUsers = group.users.reduce(
         (groupUsersRelationships, userName) => {
-          const parentKey = generateEntityKey(USER_ENTITY_TYPE, usersDict[userName].metadata.uid);
-          const childKey = generateEntityKey(GROUP_ENTITY_TYPE, group.metadata.uid);
-          const key = generateRelationshipKey(parentKey, childKey, USER_GROUP_RELATIONSHIP_CLASS);
+          const parentKey = generateEntityKey(
+            USER_ENTITY_TYPE,
+            usersDict[userName].metadata.uid,
+          );
+          const childKey = generateEntityKey(
+            GROUP_ENTITY_TYPE,
+            group.metadata.uid,
+          );
+          const key = generateRelationshipKey(
+            parentKey,
+            childKey,
+            USER_GROUP_RELATIONSHIP_CLASS,
+          );
 
           const relationship: UserGroupRelationship = {
             _class: USER_GROUP_RELATIONSHIP_CLASS,

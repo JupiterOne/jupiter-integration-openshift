@@ -6,7 +6,8 @@ test("convert service accounts", async () => {
       metadata: {
         name: "builder",
         namespace: "example_namespace",
-        selfLink: "/api/v1/namespaces/example_namespace/serviceaccounts/builder",
+        selfLink:
+          "/api/v1/namespaces/example_namespace/serviceaccounts/builder",
         uid: "c077817b-61bf-11e9-b220-0a2a2b777307",
         resourceVersion: "3548833510",
         creationTimestamp: "2019-04-18T09:53:00Z",
@@ -44,7 +45,9 @@ test("convert service accounts", async () => {
     },
   };
 
-  const entities = createServiceAccountEntities([{ routes: [], serviceAccounts, services: [], pods: [], project }]);
+  const entities = createServiceAccountEntities([
+    { routes: [], serviceAccounts, services: [], pods: [], project },
+  ]);
 
   expect(entities).toEqual([
     {

@@ -1,3 +1,24 @@
 language: node_js
 node_js:
-  - "8.10"
+  - '8'
+  - '10'
+  - '11'
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+
+script: yarn build
+
+deploy:
+  provider: npm
+  email: npm@jupiterone.io
+  api_key:
+    secure: "NNl0h9LCzlddZHrWagLVNEUd3w8Oj7UBznqrsUX8fbMquUY+AqFgw2raHG/4jIqHtPKU4zcD58Mdv60x3Gq2rXZDYqz3L85c8dMQaZnFzwrl3vxjhSsQ3uAswh8ICMV9hebEQmT4cQOyZvznQiP9rt/F21qOSO5PHCFdFU/6ny0T6zo881kGs6jIdrTIEykRM7ZbMX1fdSrlJ3Y/hL3gwWbD/CJuvEez6Pahb3zvCJhneWirzQFzEEApD8vbOzhWp3Ps6vbcFtKduFiQTuEfklHgoROrVSQ8h7vGJHVZJaC53UBH7PbILOKckM0DHsU9letcPaxPqESjvmFcvLh4iiFCzdGtSeBUDOdwTJimP/IOlKLdYIZByrg8e39+vE+M+doirJV3gdDhrp3yfDjWzK9B5QR7nE82UUUKKRbMlCmuEtYUflWvSz57Y7Ff0U5nyAE74Kj3E6KGFtpjEJRmb4eYFarOBltxN15M0I7suZwgb8Bw+6xHB8CTNltp4RdJlyj2Ccc/150hZwpktP6xbPFModf7+Y3iqeeDos+sDWzGjFv6XkBkuveJZhWuGRWUQieUPbuWbUFWyHQrdFclmPmHw9wDmSt7KBJ6Dtg26mn1etJ/xSmmLFKGt71Cug40fDm27ShsgqRhfBGnwsKLXOb4TI71onURVw//WDZNxKs="
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: master
+    repo: JupiterOne/jupiter-integration-openshift
+    node: '8'

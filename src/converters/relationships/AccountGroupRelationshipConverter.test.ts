@@ -37,14 +37,16 @@ test("convert account -> group relationships", async () => {
     {
       _class: "HAS",
       _fromEntityKey: "openshift_account_id",
-      _key: "openshift_account_id_has_openshift_user_group_259b87ab-5c46-11e9-82b7-4e620801d617",
+      _key:
+        "openshift_account_id_has_openshift_user_group_259b87ab-5c46-11e9-82b7-4e620801d617",
       _toEntityKey: "openshift_user_group_259b87ab-5c46-11e9-82b7-4e620801d617",
       _type: "openshift_account_has_group",
     },
     {
       _class: "HAS",
       _fromEntityKey: "openshift_account_id",
-      _key: "openshift_account_id_has_openshift_user_group_2aafc5a6-5c46-11e9-82b7-4e620801d617",
+      _key:
+        "openshift_account_id_has_openshift_user_group_2aafc5a6-5c46-11e9-82b7-4e620801d617",
       _toEntityKey: "openshift_user_group_2aafc5a6-5c46-11e9-82b7-4e620801d617",
       _type: "openshift_account_has_group",
     },

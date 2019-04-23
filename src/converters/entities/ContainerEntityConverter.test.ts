@@ -17,7 +17,8 @@ test("convert containers", async () => {
           name: "jenkins",
         },
         annotations: {
-          "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container jenkins; cpu limit for container jenkins",
+          "kubernetes.io/limit-ranger":
+            "LimitRanger plugin set: cpu request for container jenkins; cpu limit for container jenkins",
           "openshift.io/deployment-config.latest-version": "1",
           "openshift.io/deployment-config.name": "jenkins",
           "openshift.io/deployment.name": "jenkins-1",
@@ -222,7 +223,8 @@ test("convert containers", async () => {
               "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
             imageID:
               "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
-            containerID: "cri-o://333c9b58ccca7b6eb89a0985e547a6238186c3dcbc321b77f0b9217fcc8ce7e1",
+            containerID:
+              "cri-o://333c9b58ccca7b6eb89a0985e547a6238186c3dcbc321b77f0b9217fcc8ce7e1",
           },
         ],
         qosClass: "Burstable",
@@ -247,13 +249,16 @@ test("convert containers", async () => {
     },
   };
 
-  const entities = createContainerEntities([{ pods, serviceAccounts: [], services: [], routes: [], project }]);
+  const entities = createContainerEntities([
+    { pods, serviceAccounts: [], services: [], routes: [], project },
+  ]);
 
   expect(entities).toEqual([
     {
       _class: "Task",
       name: "jenkins",
-      image: "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
+      image:
+        "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
       _key: "openshift_container_c764e7d4-61bf-11e9-b220-0a2a2b777307_jenkins",
       _type: "openshift_container",
       displayName: "jenkins",

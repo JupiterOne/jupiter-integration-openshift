@@ -1,4 +1,8 @@
-import { USER_ENTITY_CLASS, USER_ENTITY_TYPE, UserEntity } from "../../jupiterone";
+import {
+  USER_ENTITY_CLASS,
+  USER_ENTITY_TYPE,
+  UserEntity,
+} from "../../jupiterone";
 import { User } from "../../openshift/types";
 
 import { generateEntityKey } from "../../utils/generateKeys";

@@ -2,7 +2,6 @@ import {
   IntegrationActionName,
   IntegrationExecutionContext,
   IntegrationExecutionResult,
-  IntegrationInvocationEvent,
 } from "@jupiterone/jupiter-managed-integration-sdk";
 
 import initializeContext from "./initializeContext";
@@ -12,7 +11,7 @@ import publishChanges from "./persister/publishChanges";
 import { OpenShiftExecutionContext } from "./types";
 
 export default async function executionHandler(
-  context: IntegrationExecutionContext<IntegrationInvocationEvent>,
+  context: IntegrationExecutionContext,
 ): Promise<IntegrationExecutionResult> {
   const actionFunction = ACTIONS[context.event.action.name];
   if (actionFunction) {
@@ -22,18 +21,27 @@ export default async function executionHandler(
   }
 }
 
-async function synchronize(context: OpenShiftExecutionContext): Promise<IntegrationExecutionResult> {
+async function synchronize(
+  context: OpenShiftExecutionContext,
+): Promise<IntegrationExecutionResult> {
   const { instance, graph, persister, openshift } = context;
 
   const oldData = await fetchEntitiesAndRelationships(graph);
   const openshiftData = await fetchOpenshiftData(openshift);
 
   return {
-    operations: await publishChanges(persister, oldData, openshiftData, instance),
+    operations: await publishChanges(
+      persister,
+      oldData,
+      openshiftData,
+      instance,
+    ),
   };
 }
 
-type ActionFunction = (context: OpenShiftExecutionContext) => Promise<IntegrationExecutionResult>;
+type ActionFunction = (
+  context: OpenShiftExecutionContext,
+) => Promise<IntegrationExecutionResult>;
 
 interface ActionMap {
   [actionName: string]: ActionFunction | undefined;

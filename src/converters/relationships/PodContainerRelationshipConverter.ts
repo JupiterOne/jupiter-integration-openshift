@@ -7,10 +7,15 @@ import {
   PodContainerRelationship,
 } from "../../jupiterone";
 
-import { generateEntityKey, generateRelationshipKey } from "../../utils/generateKeys";
+import {
+  generateEntityKey,
+  generateRelationshipKey,
+} from "../../utils/generateKeys";
 import { generateContainerKey } from "../entities/ContainerEntityConverter";
 
-export function createPodContainerRelationships(namespaces: NamespaceData[]): PodContainerRelationship[] {
+export function createPodContainerRelationships(
+  namespaces: NamespaceData[],
+): PodContainerRelationship[] {
   const defaultRelationships: PodContainerRelationship[] = [];
 
   return namespaces.reduce((relationships, namespace) => {
@@ -18,7 +23,9 @@ export function createPodContainerRelationships(namespaces: NamespaceData[]): Po
   }, defaultRelationships);
 }
 
-function createNsPodContainerRelationships(namespace: NamespaceData): PodContainerRelationship[] {
+function createNsPodContainerRelationships(
+  namespace: NamespaceData,
+): PodContainerRelationship[] {
   const defaultRelationships: PodContainerRelationship[] = [];
 
   return namespace.pods.reduce((relationships, pod) => {
@@ -30,7 +37,11 @@ function createPodRelationships(pod: Pod): PodContainerRelationship[] {
   return pod.spec.containers.map(container => {
     const parentKey = generateEntityKey(POD_ENTITY_TYPE, pod.metadata.uid);
     const childKey = generateContainerKey(pod, container);
-    const relationshipKey = generateRelationshipKey(parentKey, childKey, POD_CONTAINER_RELATIONSHIP_CLASS);
+    const relationshipKey = generateRelationshipKey(
+      parentKey,
+      childKey,
+      POD_CONTAINER_RELATIONSHIP_CLASS,
+    );
 
     const relationship: PodContainerRelationship = {
       _class: POD_CONTAINER_RELATIONSHIP_CLASS,

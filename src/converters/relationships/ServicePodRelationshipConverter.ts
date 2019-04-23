@@ -8,22 +8,33 @@ import {
   ServicePodRelationship,
 } from "../../jupiterone";
 
-import { generateEntityKey, generateRelationshipKey } from "../../utils/generateKeys";
+import {
+  generateEntityKey,
+  generateRelationshipKey,
+} from "../../utils/generateKeys";
 
 interface PodDict {
   [name: string]: Pod[];
 }
 
-export function createServicePodRelationships(namespaces: NamespaceData[]): ServicePodRelationship[] {
+export function createServicePodRelationships(
+  namespaces: NamespaceData[],
+): ServicePodRelationship[] {
   const podsDict: PodDict = populatePodsDict(namespaces);
   const defaultRelationships: ServicePodRelationship[] = [];
 
   return namespaces.reduce((relationships, namespace) => {
-    return [...relationships, ...createNsServicePodRelationships(namespace, podsDict)];
+    return [
+      ...relationships,
+      ...createNsServicePodRelationships(namespace, podsDict),
+    ];
   }, defaultRelationships);
 }
 
-function createNsServicePodRelationships(namespace: NamespaceData, podsDict: PodDict): ServicePodRelationship[] {
+function createNsServicePodRelationships(
+  namespace: NamespaceData,
+  podsDict: PodDict,
+): ServicePodRelationship[] {
   const defaultRelationships: ServicePodRelationship[] = [];
 
   return namespace.services.reduce((relationships, service) => {
@@ -31,7 +42,9 @@ function createNsServicePodRelationships(namespace: NamespaceData, podsDict: Pod
       return relationships;
     }
 
-    const key = `${namespace.project.metadata.name}_${service.spec.selector.name}`;
+    const key = `${namespace.project.metadata.name}_${
+      service.spec.selector.name
+    }`;
     const pods = podsDict[key];
 
     if (!pods) {
@@ -46,10 +59,20 @@ function createNsServicePodRelationships(namespace: NamespaceData, podsDict: Pod
   }, defaultRelationships);
 }
 
-function createRelationship(pod: Pod, service: Service): ServicePodRelationship {
-  const parentKey = generateEntityKey(SERVICE_ENTITY_TYPE, service.metadata.uid);
+function createRelationship(
+  pod: Pod,
+  service: Service,
+): ServicePodRelationship {
+  const parentKey = generateEntityKey(
+    SERVICE_ENTITY_TYPE,
+    service.metadata.uid,
+  );
   const childKey = generateEntityKey(POD_ENTITY_TYPE, pod.metadata.uid);
-  const relationshipKey = generateRelationshipKey(parentKey, childKey, SERVICE_POD_RELATIONSHIP_CLASS);
+  const relationshipKey = generateRelationshipKey(
+    parentKey,
+    childKey,
+    SERVICE_POD_RELATIONSHIP_CLASS,
+  );
 
   const relationship: ServicePodRelationship = {
     _class: SERVICE_POD_RELATIONSHIP_CLASS,
@@ -70,7 +93,9 @@ function populatePodsDict(namespaces: NamespaceData[]): PodDict {
       if (!(pod.metadata.labels && pod.metadata.labels.name)) {
         return;
       }
-      const key = `${namespace.project.metadata.name}_${pod.metadata.labels.name}`;
+      const key = `${namespace.project.metadata.name}_${
+        pod.metadata.labels.name
+      }`;
 
       if (podsDict[key]) {
         podsDict[key] = [...podsDict[key], pod];

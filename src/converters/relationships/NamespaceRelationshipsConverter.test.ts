@@ -14,7 +14,9 @@ import { NamespaceData } from "../../openshift/types";
 import { createNamespaceRelationships } from "./NamespaceRelationshipsConverter";
 
 test("convert namespace relationships", async () => {
-  const file = readFileSync(`${__dirname}/../../../test/fixtures/namespace-objects.json`);
+  const file = readFileSync(
+    `${__dirname}/../../../test/fixtures/namespace-objects.json`,
+  );
   const namespace = JSON.parse(file.toString()) as NamespaceData;
   const namespaces = [namespace];
 
@@ -46,21 +48,24 @@ test("convert namespace relationships", async () => {
     {
       _class: "HAS",
       _fromEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
-      _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
+      _key:
+        "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _toEntityKey: "openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _type: "openshift_project_has_route",
     },
     {
       _class: "HAS",
       _fromEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
-      _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
+      _key:
+        "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _toEntityKey: "openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _type: "openshift_project_has_route",
     },
     {
       _class: "HAS",
       _fromEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
-      _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
+      _key:
+        "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _toEntityKey: "openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _type: "openshift_project_has_route",
     },
@@ -69,21 +74,24 @@ test("convert namespace relationships", async () => {
     {
       _class: "HAS",
       _fromEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
-      _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
+      _key:
+        "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _toEntityKey: "openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _type: "openshift_project_has_service",
     },
     {
       _class: "HAS",
       _fromEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
-      _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
+      _key:
+        "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _toEntityKey: "openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _type: "openshift_project_has_service",
     },
     {
       _class: "HAS",
       _fromEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
-      _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
+      _key:
+        "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _toEntityKey: "openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _type: "openshift_project_has_service",
     },
@@ -92,8 +100,10 @@ test("convert namespace relationships", async () => {
     {
       _class: "HAS",
       _fromEntityKey: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
-      _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_account_c077817b-61bf-11e9-b220-0a2a2b777307",
-      _toEntityKey: "openshift_service_account_c077817b-61bf-11e9-b220-0a2a2b777307",
+      _key:
+        "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617_has_openshift_service_account_c077817b-61bf-11e9-b220-0a2a2b777307",
+      _toEntityKey:
+        "openshift_service_account_c077817b-61bf-11e9-b220-0a2a2b777307",
       _type: "openshift_project_has_service_account",
     },
   ]);
