@@ -6,6 +6,7 @@ import {
 import { Project } from "../../openshift/types";
 
 import { generateEntityKey } from "../../utils/generateKeys";
+import getTime from "../../utils/getTime";
 
 export function createProjectEntities(data: Project[]): ProjectEntity[] {
   return data.map(d => {
@@ -18,7 +19,7 @@ export function createProjectEntities(data: Project[]): ProjectEntity[] {
       namespace: d.metadata.namespace,
       generation: d.metadata.generation,
       resourceVersion: d.metadata.resourceVersion,
-      creationTimestamp: d.metadata.creationTimestamp,
+      creationTimestamp: getTime(d.metadata.creationTimestamp)!,
     };
 
     return project;

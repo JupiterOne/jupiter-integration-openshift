@@ -1,6 +1,7 @@
 import { POD_ENTITY_CLASS, POD_ENTITY_TYPE, PodEntity } from "../../jupiterone";
 import { NamespaceData } from "../../openshift/types";
 import { generateEntityKey } from "../../utils/generateKeys";
+import getTime from "../../utils/getTime";
 
 export function createPodEntities(namespaces: NamespaceData[]): PodEntity[] {
   const defaultEntities: PodEntity[] = [];
@@ -15,13 +16,13 @@ export function createPodEntities(namespaces: NamespaceData[]): PodEntity[] {
         uid: pod.metadata.uid,
         namespace: pod.metadata.namespace,
         resourceVersion: pod.metadata.resourceVersion,
-        creationTimestamp: pod.metadata.creationTimestamp,
+        creationTimestamp: getTime(pod.metadata.creationTimestamp)!,
         name: pod.metadata.name,
         nodeName: pod.spec.nodeName,
         phase: pod.status.phase,
         hostIP: pod.status.hostIP,
         podIP: pod.status.podIP,
-        startTime: pod.status.startTime,
+        startTime: getTime(pod.status.startTime)!,
         qosClass: pod.status.qosClass,
       };
 

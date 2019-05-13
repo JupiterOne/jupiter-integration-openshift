@@ -54,7 +54,7 @@ test("convert service accounts", async () => {
       _class: "User",
       _key: "openshift_service_account_c077817b-61bf-11e9-b220-0a2a2b777307",
       _type: "openshift_service_account",
-      creationTimestamp: "2019-04-18T09:53:00Z",
+      creationTimestamp: 1555581180000,
       displayName: "builder",
       name: "builder",
       namespace: "example_namespace",

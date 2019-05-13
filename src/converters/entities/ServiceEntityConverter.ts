@@ -5,6 +5,7 @@ import {
 } from "../../jupiterone";
 import { NamespaceData } from "../../openshift/types";
 import { generateEntityKey } from "../../utils/generateKeys";
+import getTime from "../../utils/getTime";
 
 export function createServiceEntities(
   namespaces: NamespaceData[],
@@ -21,7 +22,7 @@ export function createServiceEntities(
         uid: srv.metadata.uid,
         namespace: srv.metadata.namespace,
         resourceVersion: srv.metadata.resourceVersion,
-        creationTimestamp: srv.metadata.creationTimestamp,
+        creationTimestamp: getTime(srv.metadata.creationTimestamp)!,
         name: srv.metadata.name,
         clusterIP: srv.spec.clusterIP,
         type: srv.spec.type,

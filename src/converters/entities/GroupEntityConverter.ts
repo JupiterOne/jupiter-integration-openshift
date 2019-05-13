@@ -7,6 +7,7 @@ import {
 import { Group } from "../../openshift/types";
 
 import { generateEntityKey } from "../../utils/generateKeys";
+import getTime from "../../utils/getTime";
 
 export function createGroupEntities(data: Group[]): GroupEntity[] {
   return data.map(d => {
@@ -19,7 +20,7 @@ export function createGroupEntities(data: Group[]): GroupEntity[] {
       namespace: d.metadata.namespace,
       generation: d.metadata.generation,
       resourceVersion: d.metadata.resourceVersion,
-      creationTimestamp: d.metadata.creationTimestamp,
+      creationTimestamp: getTime(d.metadata.creationTimestamp)!,
     };
     return group;
   });
