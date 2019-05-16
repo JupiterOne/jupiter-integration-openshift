@@ -65,7 +65,7 @@ test("convert services", async () => {
 
   expect(entities).toEqual([
     {
-      _class: "Task",
+      _class: "Gateway",
       _key: "openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _type: "openshift_service",
       clusterIP: "172.30.122.71",

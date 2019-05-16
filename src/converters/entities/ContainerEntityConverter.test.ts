@@ -255,7 +255,7 @@ test("convert containers", async () => {
 
   expect(entities).toEqual([
     {
-      _class: "Task",
+      _class: ["Process", "Workload"],
       name: "jenkins",
       image:
         "docker-registry.default.svc:5000/openshift/jenkins@sha256:3b6ad6c87518f153c6c38c5190f6d95535af3c8210adc8904d6a7f7f4180a36f",
