@@ -255,7 +255,7 @@ test("convert pods", async () => {
 
   expect(entities).toEqual([
     {
-      _class: "Task",
+      _class: ["Cluster", "Task"],
       _key: "openshift_pod_c764e7d4-61bf-11e9-b220-0a2a2b777307",
       _type: "openshift_pod",
       creationTimestamp: "2019-04-18T09:53:12Z",
