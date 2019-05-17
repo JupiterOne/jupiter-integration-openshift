@@ -22,11 +22,18 @@ async function fetchNamespaceData(
   client: OpenShiftClient,
 ): Promise<NamespaceData> {
   const namespace = project.metadata.name;
-  const [serviceAccounts, services, pods, routes] = await Promise.all([
+  const [
+    serviceAccounts,
+    services,
+    pods,
+    routes,
+    deployments,
+  ] = await Promise.all([
     client.fetchNamespaceServiceAccounts(namespace),
     client.fetchNamespaceServices(namespace),
     client.fetchNamespacePods(namespace),
     client.fetchNamespaceRoutes(namespace),
+    client.fetchNamespaceDeployments(namespace),
   ]);
 
   return {
@@ -35,5 +42,6 @@ async function fetchNamespaceData(
     services,
     pods,
     routes,
+    deployments,
   };
 }

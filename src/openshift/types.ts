@@ -12,6 +12,16 @@ interface Metadata {
   labels?: {
     [name: string]: string;
   };
+  ownerReferences?: OwnerReference[];
+}
+
+export interface OwnerReference {
+  apiVersion: string;
+  kind: string;
+  name: string;
+  uid: string;
+  controller: boolean;
+  blockOwnerDeletion: boolean;
 }
 
 export interface OpenshiftEntity {
@@ -73,9 +83,11 @@ interface Volume {
     defaultMode: number;
   };
 }
+
 interface Secret {
   name: string;
 }
+
 interface EnvVar {
   name: string;
   value: string;
@@ -195,6 +207,24 @@ export interface Project extends OpenshiftEntity {
   };
 }
 
+export interface Deployment extends OpenshiftEntity {
+  spec: {
+    replicas: number;
+    template: {
+      spec: {
+        containers: Container[];
+      };
+    };
+  };
+  status: {
+    replicas: number;
+    fullyLabeledReplicas?: number;
+    readyReplicas?: number;
+    availableReplicas?: number;
+    observedGeneration?: number;
+  };
+}
+
 export interface ServiceAccount extends OpenshiftEntity {
   secrets: Secret[];
   imagePullSecrets: Secret[];
@@ -239,4 +269,5 @@ export interface NamespaceData {
   services: Service[];
   pods: Pod[];
   routes: Route[];
+  deployments: Deployment[];
 }

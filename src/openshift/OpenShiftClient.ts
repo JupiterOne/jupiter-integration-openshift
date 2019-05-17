@@ -2,6 +2,7 @@
 const openshiftRestClient = require("openshift-rest-client").OpenshiftClient;
 
 import {
+  Deployment,
   Group,
   Pod,
   Project,
@@ -88,6 +89,18 @@ export default class OpenShiftClient {
       .routes.get();
 
     return routes;
+  }
+
+  public async fetchNamespaceDeployments(
+    namespace: string,
+  ): Promise<Deployment[]> {
+    const {
+      body: { items: deployments },
+    } = await this.restClient.api.v1
+      .namespaces(namespace)
+      .replicationcontrollers.get();
+
+    return deployments;
   }
 
   public async fetchNamespacePods(namespace: string): Promise<Pod[]> {
