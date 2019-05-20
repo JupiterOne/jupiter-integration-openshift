@@ -135,6 +135,16 @@ describe("OpenShiftClient fetch ok data", () => {
     nockDone();
   });
 
+  test("fetchNamespaceDeployments ok", async () => {
+    const { nockDone } = await nock.back("namespace-deployments-ok.json", {
+      before: prepareScope,
+    });
+    const client = await getAuthenticatedClient();
+    const response = await client.fetchNamespaceDeployments(EXAMPLE_NAMESPACE);
+    expect(response.length).not.toEqual(0);
+    nockDone();
+  });
+
   test("fetchNamespaceRoutes ok", async () => {
     const { nockDone } = await nock.back("namespace-routes-ok.json", {
       before: prepareScope,

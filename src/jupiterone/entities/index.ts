@@ -7,3 +7,4 @@ export * from "./RouteEntity";
 export * from "./ServiceAccountEntity";
 export * from "./ServiceEntity";
 export * from "./UserEntity";
+export * from "./DeploymentEntity";

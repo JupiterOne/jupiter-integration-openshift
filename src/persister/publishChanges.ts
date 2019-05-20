@@ -7,7 +7,17 @@ import {
 
 import * as EntityConverters from "../converters/entities";
 import * as RelationshipConverters from "../converters/relationships";
+import {
+  DEPLOYMENT_ENTITY_TYPE,
+  POD_ENTITY_TYPE,
+} from "../jupiterone/entities";
 import * as Entities from "../jupiterone/entities";
+import {
+  PROJECT_DEPLOYMENT_RELATIONSHIP_CLASS,
+  PROJECT_DEPLOYMENT_RELATIONSHIP_TYPE,
+  PROJECT_POD_RELATIONSHIP_CLASS,
+  PROJECT_POD_RELATIONSHIP_TYPE,
+} from "../jupiterone/relationships";
 import * as Relationships from "../jupiterone/relationships";
 
 import { IntegrationInstance } from "@jupiterone/jupiter-managed-integration-sdk";
@@ -122,6 +132,9 @@ export function convertEntities(
       openshiftDataModel.namespaces,
     ),
     users: EntityConverters.createUserEntities(openshiftDataModel.users),
+    deployments: EntityConverters.createDeploymentEntities(
+      openshiftDataModel.namespaces,
+    ),
   };
 }
 
@@ -155,6 +168,22 @@ export function convertRelationships(
     Relationships.PROJECT_SERVICE_ACCOUNT_RELATIONSHIP_CLASS,
   );
 
+  const projectPodRelationships = RelationshipConverters.createNamespaceRelationships(
+    openshiftDataModel.namespaces,
+    "pods",
+    POD_ENTITY_TYPE,
+    PROJECT_POD_RELATIONSHIP_TYPE,
+    PROJECT_POD_RELATIONSHIP_CLASS,
+  );
+
+  const projectDeploymentRelationships = RelationshipConverters.createNamespaceRelationships(
+    openshiftDataModel.namespaces,
+    "deployments",
+    DEPLOYMENT_ENTITY_TYPE,
+    PROJECT_DEPLOYMENT_RELATIONSHIP_TYPE,
+    PROJECT_DEPLOYMENT_RELATIONSHIP_CLASS,
+  );
+
   return {
     accountGroupRelationships: RelationshipConverters.createAccountGroupRelationships(
       openshiftDataModel.groups,
@@ -171,10 +200,15 @@ export function convertRelationships(
     projectRouteRelationships,
     projectServiceAccountRelationships,
     projectServiceRelationships,
+    projectDeploymentRelationships,
+    projectPodRelationships,
     routeServiceRelationships: RelationshipConverters.createRouteServiceRelationships(
       openshiftDataModel.namespaces,
     ),
     podContainerRelationships: RelationshipConverters.createPodContainerRelationships(
+      openshiftDataModel.namespaces,
+    ),
+    podDeploymentRelationships: RelationshipConverters.createPodDeploymentRelationships(
       openshiftDataModel.namespaces,
     ),
     servicePodRelationships: RelationshipConverters.createServicePodRelationships(

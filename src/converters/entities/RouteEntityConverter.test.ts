@@ -75,7 +75,14 @@ test("convert routes", async () => {
   };
 
   const entities = createRouteEntities([
-    { routes, serviceAccounts: [], services: [], pods: [], project },
+    {
+      routes,
+      serviceAccounts: [],
+      services: [],
+      pods: [],
+      project,
+      deployments: [],
+    },
   ]);
 
   expect(entities).toEqual([

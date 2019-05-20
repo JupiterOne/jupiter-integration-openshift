@@ -65,6 +65,7 @@ beforeEach(() => {
     fetchNamespaceRoutes: jest.fn().mockReturnValue([]),
     fetchNamespacePods: jest.fn().mockReturnValue([]),
     fetchNamespaceServices: jest.fn().mockReturnValue([]),
+    fetchNamespaceDeployments: jest.fn().mockReturnValue([]),
   } as unknown) as OpenShiftClient;
 
   executionContext = ({

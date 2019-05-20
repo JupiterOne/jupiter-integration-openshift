@@ -250,7 +250,14 @@ test("convert containers", async () => {
   };
 
   const entities = createContainerEntities([
-    { pods, serviceAccounts: [], services: [], routes: [], project },
+    {
+      pods,
+      serviceAccounts: [],
+      services: [],
+      routes: [],
+      project,
+      deployments: [],
+    },
   ]);
 
   expect(entities).toEqual([

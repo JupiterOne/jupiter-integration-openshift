@@ -11,7 +11,7 @@ import { RelationshipFromIntegration } from "@jupiterone/jupiter-managed-integra
 
 export function createNamespaceRelationships(
   namespaces: NamespaceData[],
-  objectKey: "routes" | "services" | "serviceAccounts" | "pods",
+  objectKey: "routes" | "services" | "serviceAccounts" | "pods" | "deployments",
   objectEntityType: string,
   relationshipType: string,
   relationshipClass: string,

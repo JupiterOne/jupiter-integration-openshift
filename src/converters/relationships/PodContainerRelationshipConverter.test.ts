@@ -30,5 +30,14 @@ test("convert namespace relationships", async () => {
         "openshift_container_c3ee12dc-61bf-11e9-ad62-000000000000_rails",
       _type: "openshift_pod_has_container",
     },
+    {
+      _class: "HAS",
+      _fromEntityKey: "openshift_pod_c3ee12dc-61bf-11e9-ad62-000000000000",
+      _key:
+        "openshift_pod_c3ee12dc-61bf-11e9-ad62-000000000000_has_openshift_container_c3ee12dc-61bf-11e9-ad62-000000000000_test",
+      _toEntityKey:
+        "openshift_container_c3ee12dc-61bf-11e9-ad62-000000000000_test",
+      _type: "openshift_pod_has_container",
+    },
   ]);
 });
