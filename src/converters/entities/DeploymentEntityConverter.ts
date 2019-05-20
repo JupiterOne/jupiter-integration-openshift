@@ -21,7 +21,7 @@ export function createDeploymentEntities(
         displayName: item.metadata.name,
         name: item.metadata.name,
         isActive: item.status.replicas > 0,
-        createdAt: getTime(item.metadata.creationTimestamp)!,
+        createdOn: getTime(item.metadata.creationTimestamp)!,
       };
 
       return [...deployments, entity];

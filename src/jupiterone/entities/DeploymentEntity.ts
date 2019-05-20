@@ -6,5 +6,5 @@ export const DEPLOYMENT_ENTITY_CLASS = ["Deployment", "Group"];
 export interface DeploymentEntity extends EntityFromIntegration {
   name: string;
   isActive: boolean;
-  createdAt: number;
+  createdOn: number;
 }
