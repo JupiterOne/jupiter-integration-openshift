@@ -83,7 +83,7 @@ test("convert routes", async () => {
       _class: "Domain",
       _key: "openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _type: "openshift_route",
-      creationTimestamp: 1555581186000,
+      createdOn: 1555581186000,
       displayName: "jenkins",
       host:
         "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",

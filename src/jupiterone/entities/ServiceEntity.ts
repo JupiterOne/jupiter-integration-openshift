@@ -8,7 +8,7 @@ export interface ServiceEntity extends EntityFromIntegration {
   name: string;
   resourceVersion: string;
   namespace?: string;
-  creationTimestamp: number;
+  createdOn: number;
   clusterIP: string;
   type: string;
 }

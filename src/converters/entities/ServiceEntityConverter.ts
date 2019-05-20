@@ -22,7 +22,7 @@ export function createServiceEntities(
         uid: srv.metadata.uid,
         namespace: srv.metadata.namespace,
         resourceVersion: srv.metadata.resourceVersion,
-        creationTimestamp: getTime(srv.metadata.creationTimestamp)!,
+        createdOn: getTime(srv.metadata.creationTimestamp)!,
         name: srv.metadata.name,
         clusterIP: srv.spec.clusterIP,
         type: srv.spec.type,

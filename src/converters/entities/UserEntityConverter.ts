@@ -19,7 +19,7 @@ export function createUserEntities(data: User[]): UserEntity[] {
       fullName: u.fullName || "",
       generation: u.metadata.generation,
       resourceVersion: u.metadata.resourceVersion,
-      creationTimestamp: getTime(u.metadata.creationTimestamp)!,
+      createdOn: getTime(u.metadata.creationTimestamp)!,
     };
 
     return user;

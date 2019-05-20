@@ -19,7 +19,7 @@ export function createProjectEntities(data: Project[]): ProjectEntity[] {
       namespace: d.metadata.namespace,
       generation: d.metadata.generation,
       resourceVersion: d.metadata.resourceVersion,
-      creationTimestamp: getTime(d.metadata.creationTimestamp)!,
+      createdOn: getTime(d.metadata.creationTimestamp)!,
     };
 
     return project;

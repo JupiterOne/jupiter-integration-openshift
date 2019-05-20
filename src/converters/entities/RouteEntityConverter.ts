@@ -22,7 +22,7 @@ export function createRouteEntities(
         uid: route.metadata.uid,
         namespace: route.metadata.namespace,
         resourceVersion: route.metadata.resourceVersion,
-        creationTimestamp: getTime(route.metadata.creationTimestamp)!,
+        createdOn: getTime(route.metadata.creationTimestamp)!,
         name: route.metadata.name,
         host: route.spec.host,
       };

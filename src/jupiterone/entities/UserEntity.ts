@@ -8,6 +8,6 @@ export interface UserEntity extends EntityFromIntegration {
   resourceVersion: string;
   generation?: number;
   namespace?: string;
-  creationTimestamp: number;
+  createdOn: number;
   fullName: string;
 }

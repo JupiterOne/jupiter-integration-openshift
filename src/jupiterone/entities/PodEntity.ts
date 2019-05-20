@@ -8,7 +8,7 @@ export interface PodEntity extends EntityFromIntegration {
   name: string;
   resourceVersion: string;
   namespace?: string;
-  creationTimestamp: number;
+  createdOn: number;
   nodeName: string;
   phase: string;
   hostIP: string;

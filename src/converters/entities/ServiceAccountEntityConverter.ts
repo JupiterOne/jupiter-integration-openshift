@@ -26,7 +26,7 @@ export function createServiceAccountEntities(
           uid: srvAcc.metadata.uid,
           namespace: srvAcc.metadata.namespace,
           resourceVersion: srvAcc.metadata.resourceVersion,
-          creationTimestamp: getTime(srvAcc.metadata.creationTimestamp)!,
+          createdOn: getTime(srvAcc.metadata.creationTimestamp)!,
           name: srvAcc.metadata.name,
         };
 

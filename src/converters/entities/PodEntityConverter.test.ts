@@ -258,7 +258,7 @@ test("convert pods", async () => {
       _class: "Task",
       _key: "openshift_pod_c764e7d4-61bf-11e9-b220-0a2a2b777307",
       _type: "openshift_pod",
-      creationTimestamp: 1555581192000,
+      createdOn: 1555581192000,
       displayName: "jenkins-1-vqgxg",
       hostIP: "172.31.56.129",
       name: "jenkins-1-vqgxg",

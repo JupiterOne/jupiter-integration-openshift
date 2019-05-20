@@ -8,5 +8,5 @@ export interface ServiceAccountEntity extends EntityFromIntegration {
   name: string;
   resourceVersion: string;
   namespace?: string;
-  creationTimestamp: number;
+  createdOn: number;
 }

@@ -16,7 +16,7 @@ export function createPodEntities(namespaces: NamespaceData[]): PodEntity[] {
         uid: pod.metadata.uid,
         namespace: pod.metadata.namespace,
         resourceVersion: pod.metadata.resourceVersion,
-        creationTimestamp: getTime(pod.metadata.creationTimestamp)!,
+        createdOn: getTime(pod.metadata.creationTimestamp)!,
         name: pod.metadata.name,
         nodeName: pod.spec.nodeName,
         phase: pod.status.phase,
