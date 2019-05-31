@@ -75,7 +75,14 @@ test("convert routes", async () => {
   };
 
   const entities = createRouteEntities([
-    { routes, serviceAccounts: [], services: [], pods: [], project },
+    {
+      routes,
+      serviceAccounts: [],
+      services: [],
+      pods: [],
+      project,
+      deployments: [],
+    },
   ]);
 
   expect(entities).toEqual([
@@ -83,7 +90,7 @@ test("convert routes", async () => {
       _class: "Domain",
       _key: "openshift_route_c3cd6d2e-61bf-11e9-9c2a-0ab8769191d3",
       _type: "openshift_route",
-      creationTimestamp: "2019-04-18T09:53:06Z",
+      createdOn: 1555581186000,
       displayName: "jenkins",
       host:
         "jenkins-example_namespace.7e14.starter-us-west-2.openshiftapps.com",

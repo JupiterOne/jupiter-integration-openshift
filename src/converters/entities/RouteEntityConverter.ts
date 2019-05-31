@@ -5,6 +5,7 @@ import {
 } from "../../jupiterone";
 import { NamespaceData } from "../../openshift/types";
 import { generateEntityKey } from "../../utils/generateKeys";
+import getTime from "../../utils/getTime";
 
 export function createRouteEntities(
   namespaces: NamespaceData[],
@@ -21,7 +22,7 @@ export function createRouteEntities(
         uid: route.metadata.uid,
         namespace: route.metadata.namespace,
         resourceVersion: route.metadata.resourceVersion,
-        creationTimestamp: route.metadata.creationTimestamp,
+        createdOn: getTime(route.metadata.creationTimestamp)!,
         name: route.metadata.name,
         host: route.spec.host,
       };

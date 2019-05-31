@@ -8,5 +8,5 @@ export interface GroupEntity extends EntityFromIntegration {
   resourceVersion: string;
   generation?: number;
   namespace?: string;
-  creationTimestamp: string;
+  createdOn: number;
 }

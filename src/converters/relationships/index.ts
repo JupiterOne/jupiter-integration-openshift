@@ -17,3 +17,6 @@ export {
 export {
   createPodContainerRelationships,
 } from "./PodContainerRelationshipConverter";
+export {
+  createPodDeploymentRelationships,
+} from "./PodDeploymentRelationshipConverter";

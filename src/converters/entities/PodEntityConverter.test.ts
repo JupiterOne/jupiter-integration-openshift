@@ -250,7 +250,14 @@ test("convert pods", async () => {
   };
 
   const entities = createPodEntities([
-    { pods, serviceAccounts: [], services: [], routes: [], project },
+    {
+      pods,
+      serviceAccounts: [],
+      services: [],
+      routes: [],
+      project,
+      deployments: [],
+    },
   ]);
 
   expect(entities).toEqual([
@@ -258,7 +265,7 @@ test("convert pods", async () => {
       _class: ["Cluster", "Task"],
       _key: "openshift_pod_c764e7d4-61bf-11e9-b220-0a2a2b777307",
       _type: "openshift_pod",
-      creationTimestamp: "2019-04-18T09:53:12Z",
+      createdOn: 1555581192000,
       displayName: "jenkins-1-vqgxg",
       hostIP: "172.31.56.129",
       name: "jenkins-1-vqgxg",
@@ -268,7 +275,7 @@ test("convert pods", async () => {
       podIP: "10.131.29.54",
       qosClass: "Burstable",
       resourceVersion: "3548837654",
-      startTime: "2019-04-18T09:53:12Z",
+      startTime: 1555581192000,
       uid: "c764e7d4-61bf-11e9-b220-0a2a2b777307",
     },
   ]);

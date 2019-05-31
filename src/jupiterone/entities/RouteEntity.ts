@@ -8,6 +8,6 @@ export interface RouteEntity extends EntityFromIntegration {
   name: string;
   resourceVersion: string;
   namespace?: string;
-  creationTimestamp: string;
+  createdOn: number;
   host: string;
 }

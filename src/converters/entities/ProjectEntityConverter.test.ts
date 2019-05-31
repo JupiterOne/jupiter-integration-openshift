@@ -31,7 +31,7 @@ test("convert projects", async () => {
       _class: "Project",
       _key: "openshift_project_39537998-5bb8-11e9-8c30-4e620801d617",
       _type: "openshift_project",
-      creationTimestamp: "2019-04-10T17:44:00Z",
+      createdOn: 1554918240000,
       displayName: "default",
       resourceVersion: "1284",
       uid: "39537998-5bb8-11e9-8c30-4e620801d617",

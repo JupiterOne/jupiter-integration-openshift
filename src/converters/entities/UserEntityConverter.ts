@@ -6,6 +6,7 @@ import {
 import { User } from "../../openshift/types";
 
 import { generateEntityKey } from "../../utils/generateKeys";
+import getTime from "../../utils/getTime";
 
 export function createUserEntities(data: User[]): UserEntity[] {
   return data.map(u => {
@@ -18,7 +19,7 @@ export function createUserEntities(data: User[]): UserEntity[] {
       fullName: u.fullName || "",
       generation: u.metadata.generation,
       resourceVersion: u.metadata.resourceVersion,
-      creationTimestamp: u.metadata.creationTimestamp,
+      createdOn: getTime(u.metadata.creationTimestamp)!,
     };
 
     return user;

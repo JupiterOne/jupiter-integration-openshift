@@ -1,6 +1,7 @@
 export { createAccountEntity } from "./AccountEntityConverter";
 export { createGroupEntities } from "./GroupEntityConverter";
 export { createContainerEntities } from "./ContainerEntityConverter";
+export { createDeploymentEntities } from "./DeploymentEntityConverter";
 export { createPodEntities } from "./PodEntityConverter";
 export { createProjectEntities } from "./ProjectEntityConverter";
 export { createRouteEntities } from "./RouteEntityConverter";

@@ -60,7 +60,14 @@ test("convert services", async () => {
   };
 
   const entities = createServiceEntities([
-    { routes: [], serviceAccounts: [], services, pods: [], project },
+    {
+      routes: [],
+      serviceAccounts: [],
+      services,
+      pods: [],
+      project,
+      deployments: [],
+    },
   ]);
 
   expect(entities).toEqual([
@@ -69,7 +76,7 @@ test("convert services", async () => {
       _key: "openshift_service_c3ee12dc-61bf-11e9-ad62-0a69cdf75e6f",
       _type: "openshift_service",
       clusterIP: "172.30.122.71",
-      creationTimestamp: "2019-04-18T09:53:06Z",
+      createdOn: 1555581186000,
       displayName: "jenkins",
       name: "jenkins",
       namespace: "example_namespace",
