@@ -1,6 +1,7 @@
 // tslint:disable:no-var-requires
 const openshiftRestClient = require("openshift-rest-client").OpenshiftClient;
 
+import { IntegrationLogger } from "@jupiterone/jupiter-managed-integration-sdk";
 import {
   Deployment,
   Group,
@@ -14,6 +15,11 @@ import {
 
 export default class OpenShiftClient {
   private restClient: any;
+  private logger: IntegrationLogger;
+
+  constructor(logger: IntegrationLogger) {
+    this.logger = logger;
+  }
 
   public async authenticate(
     apiToken: string,
@@ -25,6 +31,12 @@ export default class OpenShiftClient {
       url: `https://${cluster}`,
       insecureSkipTlsVerify,
     };
+
+    if (config.insecureSkipTlsVerify) {
+      this.logger.warn(
+        "Attention! SSL/TLS certificate verification is disabled.",
+      );
+    }
 
     this.restClient = await openshiftRestClient({ config });
   }

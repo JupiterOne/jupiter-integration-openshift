@@ -7,9 +7,10 @@ export default async function initializeContext(
 ): Promise<OpenShiftExecutionContext> {
   const {
     instance: { config },
+    logger,
   } = context;
 
-  const openshift = new OpenShiftClient();
+  const openshift = new OpenShiftClient(logger);
   await openshift.authenticate(
     config.apiToken,
     config.cluster,
