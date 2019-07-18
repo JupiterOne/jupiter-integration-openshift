@@ -38,7 +38,7 @@ function createNsServicePodRelationships(
   const defaultRelationships: ServicePodRelationship[] = [];
 
   return namespace.services.reduce((relationships, service) => {
-    if (!service.spec.selector.name) {
+    if (!service.spec.selector || !service.spec.selector.name) {
       return relationships;
     }
 

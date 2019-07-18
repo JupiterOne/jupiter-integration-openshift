@@ -8,6 +8,16 @@ import executionHandler from "./executionHandler";
 import initializeContext from "./initializeContext";
 import { OpenShiftClient } from "./openshift";
 
+import Logger, { LogLevel } from "bunyan";
+
+export { Logger };
+
+export const logger = Logger.createLogger({
+  name: module.filename,
+  serializers: Logger.stdSerializers,
+  level: (process.env.LOG_LEVEL || "info") as LogLevel,
+});
+
 jest.mock("./openshift");
 
 const clients = {
@@ -64,6 +74,7 @@ beforeEach(() => {
   } as unknown) as OpenShiftClient;
 
   executionContext = ({
+    logger,
     event: {
       action: {
         name: IntegrationActionName.INGEST,
