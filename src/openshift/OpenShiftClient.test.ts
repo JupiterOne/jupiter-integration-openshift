@@ -21,7 +21,10 @@ describe("OpenShiftClient fetch ok data", () => {
   });
 
   async function getAuthenticatedClient() {
-    const openshift = new OpenShiftClient();
+    const logger = {
+      warn: jest.fn().mockImplementation(),
+    };
+    const openshift = new OpenShiftClient(logger as any);
     await openshift.authenticate(TOKEN, CLUSTER, true);
 
     return openshift;
