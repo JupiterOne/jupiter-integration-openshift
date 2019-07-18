@@ -16,6 +16,7 @@
     "start": "ts-node --require dotenv/config tools/execute.ts | bunyan",
     "start:graph": "docker run -d --rm --name jupiterone-local-graph -p 8182:8182 tinkerpop/gremlin-server:3.3",
     "stop:graph": "docker stop jupiterone-local-graph",
+    "autobuild": "(yarn unlink || true) && yarn link && yarn nodemon --exec 'yarn build' --watch src --watch docs -e ts,js --delay 3",
     "prebuild": "yarn test",
     "build": "rm -rf dist/* && yarn build:types && yarn build:src && yarn build:docs",
     "build:src": "babel src --extensions '.ts' --out-dir dist",
@@ -30,7 +31,7 @@
   },
   "dependencies": {
     "@jupiterone/jupiter-managed-integration-sdk": "^24.0.5",
-    "openshift-rest-client": "^2.1.0"
+    "openshift-rest-client": "^2.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -51,6 +52,7 @@
     "jest": "^24.0.0",
     "lint-staged": "^8.1.3",
     "nock": "^10.0.6",
+    "nodemon": "^1.19.1",
     "prettier": "1.16.4",
     "remark-cli": "^6.0.1",
     "remark-lint": "^6.0.4",

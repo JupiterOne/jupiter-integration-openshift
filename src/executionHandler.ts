@@ -26,16 +26,31 @@ async function synchronize(
 ): Promise<IntegrationExecutionResult> {
   const { instance, graph, persister, openshift } = context;
 
+  context.logger.info("Fetching existing entities and relationships...");
   const oldData = await fetchEntitiesAndRelationships(graph);
+  context.logger.info("Fetched existing entities and relationships.");
+
+  context.logger.info("Fetching new entities and relationships...");
   const openshiftData = await fetchOpenshiftData(openshift);
+  context.logger.info("Fetched new entities and relationships.");
+
+  context.logger.info("Publishing changes...");
+
+  const operations = await publishChanges(
+    persister,
+    oldData,
+    openshiftData,
+    instance,
+  );
+  context.logger.info(
+    {
+      operations,
+    },
+    "Published changes",
+  );
 
   return {
-    operations: await publishChanges(
-      persister,
-      oldData,
-      openshiftData,
-      instance,
-    ),
+    operations,
   };
 }
 
