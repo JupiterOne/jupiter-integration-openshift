@@ -20,5 +20,5 @@ deploy:
   on:
     tags: true
     branch: master
-    repo: JupiterOne/jupiter-integration-openshift
+    repo: JupiterOne/graph-openshift
     node: '8'
