@@ -95,7 +95,7 @@ async function fetchEntities(
     serviceAccounts,
     containers,
     deployments,
-  };
+  } as JupiterOneEntitiesData;
 }
 
 export async function fetchRelationships(
